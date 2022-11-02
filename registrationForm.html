@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
+      crossorigin="anonymous"
+    />
+    <style>
+      body {
+        color: #000;
+        overflow-x: hidden;
+        height: 100%;
+        background-color: whitesmoke;
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+      }
+      .form-control-label {
+        margin-bottom: 0;
+      }
+      input,
+      textarea,
+      button {
+        padding: 8px 15px;
+        border-radius: 5px !important;
+        margin: 5px 0px;
+        box-sizing: border-box;
+        border: 1px solid #ccc;
+        font-size: 18px !important;
+        font-weight: 300;
+      }
+      input:focus,
+      textarea:focus {
+        box-shadow: none !important;
+        border: 1px solid #00bcd4;
+        outline-width: 0;
+        font-weight: 400;
+      }
+    </style>
+    <title>Final Project</title>
+  </head>
+  <body>
+    <div class="container-fluid px-1 py-5 mx-auto">
+      <div class="row d-flex justify-content-center">
+        <div class="col-xl-7 col-lg-8 col-md-9 col-11 text-center">
+          <h3>Create an Account</h3>
+          <div
+            class="card"
+            style="
+              padding: 30px 40px;
+              margin-top: 60px;
+              margin-bottom: 60px;
+              border: none;
+              box-shadow: 0 6px 12px 0 rgba(0, 0, 0, 0.2);
+            "
+          >
+            <h5 class="text-center mb-4">User Info</h5>
+            <form class="form-card">
+              <div id="genInfo">
+                <div class="row justify-content-between text-left">
+                  <div class="form-group col-sm-6 flex-column d-flex">
+                    <label class="form-control-label px-3">First name</label>
+                    <input
+                      type="text"
+                      id="inputFirstName"
+                      name="firstName"
+                      placeholder="Enter your first name"
+                    />
+                  </div>
+                  <div class="form-group col-sm-6 flex-column d-flex">
+                    <label class="form-control-label px-3">Last name </label>
+                    <input
+                      type="text"
+                      id="inputLastName"
+                      name="lastName"
+                      placeholder="Enter your last name"
+                    />
+                  </div>
+                </div>
+                <div class="row justify-content-between text-left">
+                  <div class="form-group col-sm-6 flex-column d-flex">
+                    <label class="form-control-label px-3">Email</label>
+                    <input
+                      type="email"
+                      id="inputEmail"
+                      name="email"
+                      placeholder="Enter your email address"
+                    />
+                  </div>
+                  <div class="form-group col-sm-6 flex-column d-flex">
+                    <label class="form-control-label px-3">Password</label>
+                    <input
+                      type="password"
+                      id="txtPassword"
+                      placeholder="Password"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div id="addressInfo">
+                <h5 class="text-center mb-4 mt-4">Address</h5>
+                <div class="row justify-content-between text-left">
+                  <div class="form-group col-sm-6 flex-column d-flex">
+                    <label class="form-control-label px-3"
+                      >Address Line 1</label
+                    >
+                    <input
+                      type="text"
+                      id="inputAdress1"
+                      name="address-1"
+                      placeholder="Street address, P.O. box, company name, c/o"
+                    />
+                  </div>
+                  <div class="form-group col-sm-6 flex-column d-flex">
+                    <label class="form-control-label px-3"
+                      >Address Line 2</label
+                    >
+                    <input
+                      type="text"
+                      id="inputAdress2"
+                      name="address-2"
+                      placeholder="Apartment, suite , unit, building, floor, etc"
+                    />
+                  </div>
+
+                  <div class="form-group col-sm-6 flex-column d-flex">
+                    <label class="form-control-label px-3">City</label>
+                    <input
+                      type="text"
+                      id="inputCity"
+                      name="city"
+                      placeholder="Enter your city"
+                    />
+                  </div>
+                  <div class="form-group col-sm-3 flex-column d-flex">
+                    <label class="form-control-label px-3">State</label>
+                    <input
+                      type="text"
+                      id="inputState"
+                      name="state"
+                      placeholder="Enter your state"
+                    />
+                  </div>
+                  <div class="form-group col-sm-3 flex-column d-flex">
+                    <label class="form-control-label px-3">Zipcode</label>
+                    <input
+                      type="number"
+                      id="inputZipcode"
+                      name="zipcode"
+                      placeholder="Enter your zipcode"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div id="difAddressCheck" class="justify-content-between">
+                <div class="form-check form-switch">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    id="diffAddressCheck"
+                  />
+                  <label class="form-check-label" for="flexSwitchCheckDefault"
+                    >Coop Address different from Home Address?</label
+                  >
+                </div>
+              </div>
+              <div id="coopInfo" style="display: none">
+                <h5 class="text-center mb-4 mt-4">Coop Address</h5>
+                <div class="row justify-content-between text-left">
+                  <div class="form-group col-sm-6 flex-column d-flex">
+                    <label class="form-control-label px-3"
+                      >Address Line 1</label
+                    >
+                    <input
+                      type="text"
+                      id="inputCoopAdress1"
+                      name="address-1"
+                      placeholder="Street address, P.O. box, company name, c/o"
+                    />
+                  </div>
+                  <div class="form-group col-sm-6 flex-column d-flex">
+                    <label class="form-control-label px-3"
+                      >Address Line 2</label
+                    >
+                    <input
+                      type="text"
+                      id="inputCoopAdress2"
+                      name="address-2"
+                      placeholder="Apartment, suite , unit, building, floor, etc"
+                    />
+                  </div>
+
+                  <div class="form-group col-sm-6 flex-column d-flex">
+                    <label class="form-control-label px-3">City</label>
+                    <input
+                      type="text"
+                      id="inputCoopCity"
+                      name="city"
+                      placeholder="Enter your city"
+                    />
+                  </div>
+                  <div class="form-group col-sm-3 flex-column d-flex">
+                    <label class="form-control-label px-3">State</label>
+                    <input
+                      type="text"
+                      id="inputCoopState"
+                      name="state"
+                      placeholder="Enter your state"
+                    />
+                  </div>
+                  <div class="form-group col-sm-3 flex-column d-flex">
+                    <label class="form-control-label px-3">Zipcode</label>
+                    <input
+                      type="number"
+                      id="inputCoopZipcode"
+                      name="zipcode"
+                      placeholder="Enter your zipcode"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="row justify-content-center">
+                <div class="form-group col-sm-6 mt-3">
+                  <button type="button" class="btn btn-primary">
+                    Create Account
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://code.jquery.com/jquery-3.6.1.min.js"
+      integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      $("#diffAddressCheck").on("change", function () {
+        console.log($(this).is(":checked"));
+        $("#coopInfo").slideToggle();
+      });
+    </script>
+  </body>
+</html>
