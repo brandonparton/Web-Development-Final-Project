@@ -95,7 +95,7 @@
                     <label class="form-control-label px-3">Password</label>
                     <input
                       type="password"
-                      id="txtPassword"
+                      id="inputPassword"
                       placeholder="Password"
                     />
                   </div>
@@ -267,22 +267,10 @@
           strErrorMessage += ('<p>Please enter a valid email</p>');
           blnError = true;
         }
-        if($('#inputPassword').val() == ''){
-          strErrorMessage += ('<p>Please enter your password</p>');
+        if(!/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,64}$/.test($('#inputPassword').val())){
+          strErrorMessage += ('<p>Please enter a valid password</p>');
           blnError = true;
         }
-        // if($('#inputPassword').val().length() < 8){
-        //   strErrorMessage += ('<p>Password must be at least 8 characters</p>');
-        //   blnError = true;
-        // }
-        // if(!/[A-Z]/.test($('#inputPassword').val())){
-        //   strErrorMessage += ('<p>Password must contain at least one uppercase letter</p>');
-        //   blnError = true;
-        // }
-        // if(!/[!@#$%&+-=?]/.test($('#inputPassword').val())){
-        //   strErrorMessage += ('<p>Password must contain at least one special character</p>');
-        //   blnError = true;
-        // }
         if($('#inputAddress1').val() == ''){
           strErrorMessage += ('<p>Please enter your address</p>');
           blnError = true;
