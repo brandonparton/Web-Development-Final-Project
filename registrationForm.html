@@ -1,314 +1,242 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="css/lib/bootstrap.min.css" rel="stylesheet">
-    <style>
-      body {
-        color: #000;
-        overflow-x: hidden;
-        height: 100%;
-        background-color: rgb(196, 196, 196);
-        background-repeat: no-repeat;
-        background-size: 100% 100%;
-      }
-      .form-control-label {
-        margin-bottom: 0;
-      }
-      input,
-      textarea,
-      button {
-        padding: 8px 15px;
-        border-radius: 5px !important;
-        margin: 5px 0px;
-        box-sizing: border-box;
-        border: 1px solid #ccc;
-        font-size: 18px !important;
-        font-weight: 300;
-      }
-      input:focus,
-      textarea:focus {
-        box-shadow: none !important;
-        border: 1px solid #00bcd4;
-        outline-width: 0;
-        font-weight: 400;
-      }
-    </style>
-    <title>Final Project</title>
-  </head>
-  <body>
-    <div class="container-fluid px-1 py-5 mx-auto">
-      <div class="row d-flex justify-content-center">
-        <div class="col-xl-7 col-lg-8 col-md-9 col-11 text-center">
-          <h3>Create an Account</h3>
-          <div
-            class="card"
-            style="
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="css/lib/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      color: #000;
+      overflow-x: hidden;
+      height: 100%;
+      background-color: #ccd5ae;
+      background-repeat: no-repeat;
+      background-size: 100% 100%;
+    }
+
+    .form-control-label {
+      margin-bottom: 0;
+    }
+
+    input,
+    textarea,
+    button {
+      padding: 8px 15px;
+      border-radius: 5px !important;
+      margin: 5px 0px;
+      box-sizing: border-box;
+      border: 1px solid #ccc;
+      font-size: 18px !important;
+      font-weight: 300;
+    }
+
+    input:focus,
+    textarea:focus {
+      box-shadow: none !important;
+      border: 1px solid #00bcd4;
+      outline-width: 0;
+      font-weight: 400;
+    }
+  </style>
+  <title>Final Project</title>
+</head>
+
+<body>
+  <div class="container-fluid px-1 py-5 mx-auto">
+    <div class="row d-flex justify-content-center">
+      <div class="col-xl-7 col-lg-8 col-md-9 col-11 text-center">
+        <div class="card" style="
               padding: 30px 40px;
               margin-top: 60px;
               margin-bottom: 60px;
               border: none;
               box-shadow: 0 6px 12px 0 rgba(0, 0, 0, 0.2);
             ">
-            <h5 class="text-center mb-4">User Info</h5>
-            <form class="form-card">
-              <div id="genInfo">
-                <div class="row justify-content-between text-left">
-                  <div class="form-group col-sm-6 flex-column d-flex">
-                    <label class="form-control-label px-3">First name</label>
-                    <input
-                      type="text"
-                      id="inputFirstName"
-                      name="firstName"
-                      placeholder="First Name"
-                    />
-                  </div>
-                  <div class="form-group col-sm-6 flex-column d-flex">
-                    <label class="form-control-label px-3">Last name </label>
-                    <input
-                      type="text"
-                      id="inputLastName"
-                      name="lastName"
-                      placeholder="Last Name"
-                    />
-                  </div>
-                </div>
-                <div class="row justify-content-between text-left">
-                  <div class="form-group col-sm-6 flex-column d-flex">
-                    <label class="form-control-label px-3">Email</label>
-                    <input
-                      type="email"
-                      id="inputEmail"
-                      name="email"
-                      placeholder="email@example.com"
-                    />
-                  </div>
-                  <div class="form-group col-sm-6 flex-column d-flex">
-                    <label class="form-control-label px-3">Password</label>
-                    <input
-                      type="password"
-                      id="inputPassword"
-                      placeholder="Password"
-                    />
-                  </div>
-                </div>
-              </div>
-              <div id="addressInfo">
-                <h5 class="text-center mb-4 mt-4">User Address</h5>
-                <div class="row justify-content-between text-left">
-                  <div class="form-group col-sm-6 flex-column d-flex">
-                    <label class="form-control-label px-3"
-                      >Address Line 1</label
-                    >
-                    <input
-                      type="text"
-                      id="inputAdress1"
-                      name="address-1"
-                      placeholder="Street address, P.O. Box, Company Name, etc"
-                    />
-                  </div>
-                  <div class="form-group col-sm-6 flex-column d-flex">
-                    <label class="form-control-label px-3"
-                      >Address Line 2</label
-                    >
-                    <input
-                      type="text"
-                      id="inputAdress2"
-                      name="address-2"
-                      placeholder="Apartment, Suite , Unit, etc"
-                    />
-                  </div>
-
-                  <div class="form-group col-sm-6 flex-column d-flex">
-                    <label class="form-control-label px-3">City</label>
-                    <input
-                      type="text"
-                      id="inputCity"
-                      name="city"
-                      placeholder="City"
-                    />
-                  </div>
-                  <div class="form-group col-sm-3 flex-column d-flex">
-                    <label class="form-control-label px-3">State</label>
-                    <input
-                      type="text"
-                      id="inputState"
-                      name="state"
-                      placeholder="State"
-                    />
-                  </div>
-                  <div class="form-group col-sm-3 flex-column d-flex">
-                    <label class="form-control-label px-3">Zip Code</label>
-                    <input
-                      type="number"
-                      id="inputZipcode"
-                      name="zipcode"
-                      placeholder="Zip Code"
-                    />
-                  </div>
-                </div>
-              </div>
-              <div id="difAddressCheck" class="justify-content-center d-flex">
-                <div>Coop Address different from Home Address?</div>
-                <div class="form-check form-switch ms-3">
-                  <input
-                    class="form-check-input"
-                    type="checkbox"
-                    id="diffAddressCheck"
-                  />
-                </div>
-              </div>
-              <div id="coopInfo" style="display: none">
-                <h5 class="text-center mb-4 mt-4">Coop Address</h5>
-                <div class="row justify-content-between text-left">
-                  <div class="form-group col-sm-6 flex-column d-flex">
-                    <label class="form-control-label px-3"
-                      >Address Line 1</label
-                    >
-                    <input
-                      type="text"
-                      id="inputCoopAdress1"
-                      name="address-1"
-                      placeholder="Street address, P.O. box, company name, c/o"
-                    />
-                  </div>
-                  <div class="form-group col-sm-6 flex-column d-flex">
-                    <label class="form-control-label px-3"
-                      >Address Line 2</label
-                    >
-                    <input
-                      type="text"
-                      id="inputCoopAdress2"
-                      name="address-2"
-                      placeholder="Apartment, suite , unit, building, floor, etc"
-                    />
-                  </div>
-
-                  <div class="form-group col-sm-6 flex-column d-flex">
-                    <label class="form-control-label px-3">City</label>
-                    <input
-                      type="text"
-                      id="inputCoopCity"
-                      name="city"
-                      placeholder="Enter your city"
-                    />
-                  </div>
-                  <div class="form-group col-sm-3 flex-column d-flex">
-                    <label class="form-control-label px-3">State</label>
-                    <input
-                      type="text"
-                      id="inputCoopState"
-                      name="state"
-                      placeholder="Enter your state"
-                    />
-                  </div>
-                  <div class="form-group col-sm-3 flex-column d-flex">
-                    <label class="form-control-label px-3">Zipcode</label>
-                    <input
-                      type="number"
-                      id="inputCoopZipcode"
-                      name="zipcode"
-                      placeholder="Enter your zipcode"
-                    />
-                  </div>
-                </div>
-              </div>
-              <div class="row justify-content-center">
-                <div class="form-group col-sm-6 mt-3">
-                  <button type="button" class="btn btn-primary" id="btnCreateAccount">
-                    Create Account
-                  </button>
-                </div>
-              </div>
-            </form>
+          <div class="card-header container-fluid">
+           <h2>Registration Form</h2>
           </div>
+          <h5 class="text-center mb-4">User Info</h5>
+          <form class="form-card">
+            <div id="genInfo">
+              <div class="row justify-content-between text-left">
+                <div class="form-group col-sm-6 flex-column d-flex">
+                  <label class="form-control-label px-3">First name</label>
+                  <input type="text" id="inputFirstName" name="firstName" placeholder="First Name" />
+                </div>
+                <div class="form-group col-sm-6 flex-column d-flex">
+                  <label class="form-control-label px-3">Last name </label>
+                  <input type="text" id="inputLastName" name="lastName" placeholder="Last Name" />
+                </div>
+              </div>
+              <div class="row justify-content-between text-left">
+                <div class="form-group col-sm-6 flex-column d-flex">
+                  <label class="form-control-label px-3">Email</label>
+                  <input type="email" id="inputEmail" name="email" placeholder="email@example.com" />
+                </div>
+                <div class="form-group col-sm-6 flex-column d-flex">
+                  <label class="form-control-label px-3">Password</label>
+                  <input type="text" id="inputPassword" placeholder="Password" />
+                </div>
+              </div>
+            </div>
+            <div id="addressInfo">
+              <h5 class="text-center mb-4 mt-4">User Address</h5>
+              <div class="row justify-content-between text-left">
+                <div class="form-group col-sm-6 flex-column d-flex">
+                  <label class="form-control-label px-3">Address Line 1</label>
+                  <input type="text" id="inputAdress1" name="address-1"
+                    placeholder="Street address, P.O. Box, Company Name, etc" />
+                </div>
+                <div class="form-group col-sm-6 flex-column d-flex">
+                  <label class="form-control-label px-3">Address Line 2</label>
+                  <input type="text" id="inputAdress2" name="address-2" placeholder="Apartment, Suite , Unit, etc" />
+                </div>
+                <div class="form-group col-sm-6 flex-column d-flex">
+                  <label class="form-control-label px-3">City</label>
+                  <input type="text" id="inputCity" name="city" placeholder="City" />
+                </div>
+                <div class="form-group col-sm-3 flex-column d-flex">
+                  <label class="form-control-label px-3">State</label>
+                  <input type="text" id="inputState" name="state" placeholder="State" />
+                </div>
+                <div class="form-group col-sm-3 flex-column d-flex">
+                  <label class="form-control-label px-3">Zip Code</label>
+                  <input type="number" id="inputZipcode" name="zipcode" placeholder="Zip Code" />
+                </div>
+              </div>
+            </div>
+            <div id="difAddressCheck" class="justify-content-center d-flex">
+              <div>Coop Address different from Home Address?</div>
+              <div class="form-check form-switch ms-3">
+                <input class="form-check-input" type="checkbox" id="diffAddressCheck" />
+              </div>
+            </div>
+            <div id="coopInfo" style="display: none">
+              <h5 class="text-center mb-4 mt-4">Coop Address</h5>
+              <div class="row justify-content-between text-left">
+                <div class="form-group col-sm-6 flex-column d-flex">
+                  <label class="form-control-label px-3">Address Line 1</label>
+                  <input type="text" id="inputCoopAdress1" name="address-1"
+                    placeholder="Street address, P.O. box, company name, c/o" />
+                </div>
+                <div class="form-group col-sm-6 flex-column d-flex">
+                  <label class="form-control-label px-3">Address Line 2</label>
+                  <input type="text" id="inputCoopAdress2" name="address-2"
+                    placeholder="Apartment, suite , unit, building, floor, etc" />
+                </div>
+
+                <div class="form-group col-sm-6 flex-column d-flex">
+                  <label class="form-control-label px-3">City</label>
+                  <input type="text" id="inputCoopCity" name="city" placeholder="Enter your city" />
+                </div>
+                <div class="form-group col-sm-3 flex-column d-flex">
+                  <label class="form-control-label px-3">State</label>
+                  <input type="text" id="inputCoopState" name="state" placeholder="Enter your state" />
+                </div>
+                <div class="form-group col-sm-3 flex-column d-flex">
+                  <label class="form-control-label px-3">Zipcode</label>
+                  <input type="number" id="inputCoopZipcode" name="zipcode" placeholder="Enter your zipcode" />
+                </div>
+              </div>
+            </div>
+            <div class="row justify-content-center">
+              <div class="form-group col-sm-6 mt-3">
+                <button type="button" class="btn" id="btnCreateAccount"
+                  style="background-color: #d4a373; color: white;">
+                  Create Account
+                </button>
+              </div>
+            </div>
+          </form>
         </div>
       </div>
     </div>
-    <script src="js/lib/bootstrap.bundle.min.js"></script>"
-    <script src="js/lib/jquery-3.6.1.min.js"></script>
-    <script src="js/lib/sweetalert2.js"></script>
-    <script>
-      $("#diffAddressCheck").on("change", function () {
-        console.log($(this).is(":checked"));
-        $("#coopInfo").slideToggle();
-      });
+  </div>
+  <script src="js/lib/bootstrap.bundle.min.js"></script>"
+  <script src="js/lib/jquery-3.6.1.min.js"></script>
+  <script src="js/lib/sweetalert2.js"></script>
+  <script>
+    $("#diffAddressCheck").on("change", function () {
+      console.log($(this).is(":checked"));
+      $("#coopInfo").slideToggle();
+    });
 
-      $('#btnCreateAccount').on('click', function(){
-        
-        let blnError = false;
-        let strErrorMessage = '';
+    $('#btnCreateAccount').on('click', function () {
 
-        if($('#inputFirstName').val() == ''){
-          strErrorMessage += ('<p>Please enter your first name</p>');
-          blnError = true;
-        }
-        if($('#inputLastName').val() == ''){
-          strErrorMessage += ('<p>Please enter your last name</p>');
-          blnError = true;
-        }
-        if(!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test($('#inputEmail').val())){
-          strErrorMessage += ('<p>Please enter a valid email</p>');
-          blnError = true;
-        }
-        if(!/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,64}$/.test($('#inputPassword').val())){
-          strErrorMessage += ('<p>Please enter a valid password</p>');
-          blnError = true;
-        }
-        if($('#inputAddress1').val() == ''){
-          strErrorMessage += ('<p>Please enter your address</p>');
-          blnError = true;
-        }
-        if($('#inputCity').val() == ''){
-          strErrorMessage += ('<p>Please enter your city</p>');
-          blnError = true;
-        }
-        if($('#inputState').val() == ''){
-          strErrorMessage += ('<p>Please enter your state</p>');
-          blnError = true;
-        }
-        if($('#inputZipcode').val() == ''){
-          strErrorMessage += ('<p>Please enter your zipcode</p>');
-          blnError = true;
-        }
-        if($('#diffAddressCheck').is(':checked')){
-          if($('#inputCoopAdress1').val() == ''){
-            strErrorMessage += ('<p>Please enter your coop address</p>');
-            blnError = true;
-          }
-          if($('#inputCoopCity').val() == ''){
-            strErrorMessage += ('<p>Please enter your coop city</p>');
-            blnError = true;
-          }
-          if($('#inputCoopState').val() == ''){
-            strErrorMessage += ('<p>Please enter your coop state</p>');
-            blnError = true;
-          }
-          if($('#inputCoopZipcode').val() == ''){
-            strErrorMessage += ('<p>Please enter your coop zipcode</p>');
-            blnError = true;
-          }
-        }
+      let blnError = false;
+      let strErrorMessage = '';
 
-        if(blnError == true) {
-          Swal.fire({
-            title: 'Error!',
-            icon: 'error',
-            html: strErrorMessage
-          })
-        } else {
-          Swal.fire({
-            title: 'Success!',
-            icon: 'success',
-            html: 'Account created successfully'
-          })
+      if ($('#inputFirstName').val() == '') {
+        strErrorMessage += ('<p>Please enter your first name</p>');
+        blnError = true;
+      }
+      if ($('#inputLastName').val() == '') {
+        strErrorMessage += ('<p>Please enter your last name</p>');
+        blnError = true;
+      }
+      if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test($('#inputEmail').val())) {
+        strErrorMessage += ('<p>Please enter a valid email</p>');
+        blnError = true;
+      }
+      if (!/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,64}$/.test($('#inputPassword').val())) {
+        strErrorMessage += ('<p>Please enter a valid password</p>');
+        blnError = true;
+      }
+      if ($('#inputAddress1').val() == '') {
+        strErrorMessage += ('<p>Please enter your address</p>');
+        blnError = true;
+      }
+      if ($('#inputCity').val() == '') {
+        strErrorMessage += ('<p>Please enter your city</p>');
+        blnError = true;
+      }
+      if ($('#inputState').val() == '') {
+        strErrorMessage += ('<p>Please enter your state</p>');
+        blnError = true;
+      }
+      if ($('#inputZipcode').val() == '') {
+        strErrorMessage += ('<p>Please enter your zipcode</p>');
+        blnError = true;
+      }
+      if ($('#diffAddressCheck').is(':checked')) {
+        if ($('#inputCoopAdress1').val() == '') {
+          strErrorMessage += ('<p>Please enter your coop address</p>');
+          blnError = true;
         }
-        
+        if ($('#inputCoopCity').val() == '') {
+          strErrorMessage += ('<p>Please enter your coop city</p>');
+          blnError = true;
+        }
+        if ($('#inputCoopState').val() == '') {
+          strErrorMessage += ('<p>Please enter your coop state</p>');
+          blnError = true;
+        }
+        if ($('#inputCoopZipcode').val() == '') {
+          strErrorMessage += ('<p>Please enter your coop zipcode</p>');
+          blnError = true;
+        }
+      }
+
+      if (blnError == true) {
+        Swal.fire({
+          title: 'Error!',
+          icon: 'error',
+          html: strErrorMessage
+        })
+      } else {
+        Swal.fire({
+          title: 'Success!',
+          icon: 'success',
+          html: 'Account created successfully'
+        })
+      }
 
 
-      })
-    </script>
-  </body>
+
+    })
+  </script>
+</body>
+
 </html>
