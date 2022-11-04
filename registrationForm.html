@@ -99,7 +99,54 @@
   </head>
 
   <body>
-    <div class="container-fluid px-1 py-5 mx-auto">
+    <div id="divLogin" class="container-fluid px-1 py-5 mx-auto">
+      <div class="row d-flex justify-content-center">
+        <div class="col-xl-7 col-lg-8 col-md-9 col-11 text-center">
+          <div class="card rounded-5">
+            <div class="card-header container-fluid">
+              <h1 style="letter-spacing: 4px"><b>LOGIN</b></h1>
+            </div>
+            <div class="form-group flex-column d-flex">
+              <label class="form-control-label px-3">Email</label>
+              <input
+                type="text"
+                id="loginEmail"
+                name="loginEmail"
+                placeholder="email@example.com"
+              />
+              <span class="bar"></span>
+            </div>
+            <div class="form-group flex-column d-flex">
+              <label class="form-control-label px-3">Password</label>
+              <input
+                type="text"
+                id="loginPassword"
+                name="loginPassword"
+                placeholder="Password"
+              />
+              <span class="bar"></span>
+            </div>
+            <button
+                    type="button"
+                    class="btn"
+                    id="btnLogin"
+                    style="background-color: #bc6c25; color: white"
+                  >
+                    Login
+                  </button>
+                  <button
+                    type="button"
+                    class="btn"
+                    id="btnCreateAccountLinker"
+                    style="background-color: #bc6c25; color: white"
+                  >
+                    Create Account
+                  </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="divRegister" class="container-fluid px-1 py-5 mx-auto" style="display:none;">
       <div class="row d-flex justify-content-center">
         <div class="col-xl-7 col-lg-8 col-md-9 col-11 text-center">
           <div class="card rounded-5">
@@ -300,13 +347,46 @@
       </div>
     </div>
     <script src="js/lib/bootstrap.bundle.min.js"></script>
-    "
     <script src="js/lib/jquery-3.6.1.min.js"></script>
     <script src="js/lib/sweetalert2.js"></script>
     <script>
+
+      $("#btnCreateAccountLinker").on("click", function () {
+        $("#divRegister").slideToggle();
+        $("#divLogin").slideToggle();
+      });
+
       $("#diffAddressCheck").on("change", function () {
         console.log($(this).is(":checked"));
         $("#coopInfo").slideToggle();
+      });
+
+      $("#btnLogin").on("click", function () {
+        let blnError = false;
+        let strErrorMessage = "";
+
+        if ($("#loginEmail").val() == "") {
+          strErrorMessage += "<p>Please enter your Email</p>";
+          blnError = true;
+        }
+        if ($("#loginPassword").val() == "") {
+          strErrorMessage += "<p>Please enter your Password</p>";
+          blnError = true;
+        }
+
+        if (blnError == true) {
+          Swal.fire({
+            title: "Error!",
+            icon: "error",
+            html: strErrorMessage,
+          });
+        } else {
+          Swal.fire({
+            title: "Success!",
+            icon: "success",
+            html: "Account created successfully",
+          });
+        }
       });
 
       $("#btnCreateAccount").on("click", function () {
