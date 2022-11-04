@@ -26,7 +26,7 @@
         background: transparent;
         color: #000;
         overflow-x: hidden;
-        font-family: "DM Serif Display", serif;
+        font-family: 'DM Serif Display', serif;
       }
 
       .form-control-label {
@@ -73,7 +73,7 @@
       }
       .bar:before,
       .bar:after {
-        content: "";
+        content: '';
         height: 2px;
         width: 0;
         bottom: 1px;
@@ -103,7 +103,7 @@
       <div class="row d-flex justify-content-center">
         <div class="col-xl-7 col-lg-8 col-md-9 col-11 text-center">
           <div class="card rounded-5">
-            <div class="card-header container-fluid">
+            <div class="container-fluid">
               <h1 style="letter-spacing: 4px"><b>LOGIN</b></h1>
             </div>
             <div class="form-group flex-column d-flex">
@@ -127,32 +127,37 @@
               <span class="bar"></span>
             </div>
             <button
-                    type="button"
-                    class="btn"
-                    id="btnLogin"
-                    style="background-color: #bc6c25; color: white"
-                  >
-                    Login
-                  </button>
-                  <button
-                    type="button"
-                    class="btn"
-                    id="btnCreateAccountLinker"
-                    style="background-color: #bc6c25; color: white"
-                  >
-                    Create Account
-                  </button>
+              type="button"
+              class="btn"
+              id="btnLogin"
+              style="background-color: #bc6c25; color: white"
+            >
+              Login
+            </button>
+            <button
+              type="button"
+              class="btn"
+              id="btnCreateAccountLinker"
+              style="background-color: #bc6c25; color: white"
+            >
+              Create Account
+            </button>
           </div>
         </div>
       </div>
     </div>
-    <div id="divRegister" class="container-fluid px-1 py-5 mx-auto" style="display:none;">
+    <div
+      id="divRegister"
+      class="container-fluid px-1 py-5 mx-auto"
+      style="display: none"
+    >
       <div class="row d-flex justify-content-center">
         <div class="col-xl-7 col-lg-8 col-md-9 col-11 text-center">
           <div class="card rounded-5">
-            <div class="card-header container-fluid">
+            <div class="container-fluid">
               <h1 style="letter-spacing: 4px"><b>REGISTER</b></h1>
             </div>
+
             <h5 class="text-center mb-4">User Info</h5>
             <form class="form-card">
               <div id="genInfo">
@@ -185,7 +190,7 @@
                       type="email"
                       id="inputEmail"
                       name="email"
-                      placeholder="email@example.com"
+                      placeholder="email@example.com" 
                     />
                     <span class="bar"></span>
                   </div>
@@ -339,6 +344,15 @@
                   >
                     Create Account
                   </button>
+                  <div>
+                    Already have an account?<button
+                      type="button"
+                      id="btnReturnLogin"
+                      style="background-color: transparent; color: #bc6c25"
+                    >
+                      Log In
+                    </button>
+                  </div>
                 </div>
               </div>
             </form>
@@ -350,119 +364,123 @@
     <script src="js/lib/jquery-3.6.1.min.js"></script>
     <script src="js/lib/sweetalert2.js"></script>
     <script>
-
-      $("#btnCreateAccountLinker").on("click", function () {
-        $("#divRegister").slideToggle();
-        $("#divLogin").slideToggle();
+      $('#btnCreateAccountLinker').on('click', function () {
+        $('#divRegister').slideToggle();
+        $('#divLogin').slideToggle();
       });
 
-      $("#diffAddressCheck").on("change", function () {
-        console.log($(this).is(":checked"));
-        $("#coopInfo").slideToggle();
+      $('#btnReturnLogin').on('click', function () {
+        $('#divLogin').slideToggle();
+        $('#divRegister').slideToggle();
       });
 
-      $("#btnLogin").on("click", function () {
+      $('#diffAddressCheck').on('change', function () {
+        console.log($(this).is(':checked'));
+        $('#coopInfo').slideToggle();
+      });
+
+      $('#btnLogin').on('click', function () {
         let blnError = false;
-        let strErrorMessage = "";
+        let strErrorMessage = '';
 
-        if ($("#loginEmail").val() == "") {
-          strErrorMessage += "<p>Please enter your Email</p>";
+        if ($('#loginEmail').val() == '') {
+          strErrorMessage += '<p>Please enter your Email</p>';
           blnError = true;
         }
-        if ($("#loginPassword").val() == "") {
-          strErrorMessage += "<p>Please enter your Password</p>";
+        if ($('#loginPassword').val() == '') {
+          strErrorMessage += '<p>Please enter your Password</p>';
           blnError = true;
         }
 
         if (blnError == true) {
           Swal.fire({
-            title: "Error!",
-            icon: "error",
+            title: 'Error!',
+            icon: 'error',
             html: strErrorMessage,
           });
         } else {
           Swal.fire({
-            title: "Success!",
-            icon: "success",
-            html: "Account created successfully",
+            title: 'Success!',
+            icon: 'success',
+            html: 'Account created successfully',
           });
         }
       });
 
-      $("#btnCreateAccount").on("click", function () {
+      $('#btnCreateAccount').on('click', function () {
         let blnError = false;
-        let strErrorMessage = "";
+        let strErrorMessage = '';
 
-        if ($("#inputFirstName").val() == "") {
-          strErrorMessage += "<p>Please enter your first name</p>";
+        if ($('#inputFirstName').val() == '') {
+          strErrorMessage += '<p>Please enter your first name</p>';
           blnError = true;
         }
-        if ($("#inputLastName").val() == "") {
-          strErrorMessage += "<p>Please enter your last name</p>";
+        if ($('#inputLastName').val() == '') {
+          strErrorMessage += '<p>Please enter your last name</p>';
           blnError = true;
         }
         if (
           !/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(
-            $("#inputEmail").val()
+            $('#inputEmail').val()
           )
         ) {
-          strErrorMessage += "<p>Please enter a valid email</p>";
+          strErrorMessage += '<p>Please enter a valid email</p>';
           blnError = true;
         }
         if (
           !/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,64}$/.test(
-            $("#inputPassword").val()
+            $('#inputPassword').val()
           )
         ) {
-          strErrorMessage += "<p>Please enter a valid password</p>";
+          strErrorMessage += '<p>Please enter a valid password</p>';
           blnError = true;
         }
-        if ($("#inputAddress1").val() == "") {
-          strErrorMessage += "<p>Please enter your address</p>";
+        if ($('#inputAddress1').val() == '') {
+          strErrorMessage += '<p>Please enter your address</p>';
           blnError = true;
         }
-        if ($("#inputCity").val() == "") {
-          strErrorMessage += "<p>Please enter your city</p>";
+        if ($('#inputCity').val() == '') {
+          strErrorMessage += '<p>Please enter your city</p>';
           blnError = true;
         }
-        if ($("#inputState").val() == "") {
-          strErrorMessage += "<p>Please enter your state</p>";
+        if ($('#inputState').val() == '') {
+          strErrorMessage += '<p>Please enter your state</p>';
           blnError = true;
         }
-        if ($("#inputZipcode").val() == "") {
-          strErrorMessage += "<p>Please enter your zipcode</p>";
+        if ($('#inputZipcode').val() == '') {
+          strErrorMessage += '<p>Please enter your zipcode</p>';
           blnError = true;
         }
-        if ($("#diffAddressCheck").is(":checked")) {
-          if ($("#inputCoopAdress1").val() == "") {
-            strErrorMessage += "<p>Please enter your coop address</p>";
+        if ($('#diffAddressCheck').is(':checked')) {
+          if ($('#inputCoopAdress1').val() == '') {
+            strErrorMessage += '<p>Please enter your coop address</p>';
             blnError = true;
           }
-          if ($("#inputCoopCity").val() == "") {
-            strErrorMessage += "<p>Please enter your coop city</p>";
+          if ($('#inputCoopCity').val() == '') {
+            strErrorMessage += '<p>Please enter your coop city</p>';
             blnError = true;
           }
-          if ($("#inputCoopState").val() == "") {
-            strErrorMessage += "<p>Please enter your coop state</p>";
+          if ($('#inputCoopState').val() == '') {
+            strErrorMessage += '<p>Please enter your coop state</p>';
             blnError = true;
           }
-          if ($("#inputCoopZipcode").val() == "") {
-            strErrorMessage += "<p>Please enter your coop zipcode</p>";
+          if ($('#inputCoopZipcode').val() == '') {
+            strErrorMessage += '<p>Please enter your coop zipcode</p>';
             blnError = true;
           }
         }
 
         if (blnError == true) {
           Swal.fire({
-            title: "Error!",
-            icon: "error",
+            title: 'Error!',
+            icon: 'error',
             html: strErrorMessage,
           });
         } else {
           Swal.fire({
-            title: "Success!",
-            icon: "success",
-            html: "Account created successfully",
+            title: 'Success!',
+            icon: 'success',
+            html: 'Account created successfully',
           });
         }
       });
