@@ -103,6 +103,18 @@
 </head>
 
 <body>
+  <div id="divDashboard" class="container-fluid px-1 py-5 mx-auto" style="display: none;">
+    <div id="divCards" class="d-flex row justify-content-center">
+      <div class="card col-2" style="padding: 10px;"></div>
+      <div class="card col-2" style="padding: 10px;"></div>
+      <div class="card col-2" style="padding: 10px;"></div>
+      <div class="card col-2" style="padding: 10px;"></div>
+    </div>
+    <div id="divSidebar">
+
+    </div>
+
+  </div>
   <div id="divLogin" class="container-fluid px-1 py-5 mx-auto">
     <div class="row d-flex justify-content-center">
       <div class="col-xl-7 col-lg-8 col-md-9 col-11 text-center">
@@ -274,31 +286,8 @@
     });
 
     $('#btnLogin').on('click', function () {
-      let blnError = false;
-      let strErrorMessage = '';
-
-      if ($('#loginEmail').val() == '') {
-        strErrorMessage += '<p>Please enter your Email</p>';
-        blnError = true;
-      }
-      if ($('#loginPassword').val() == '') {
-        strErrorMessage += '<p>Please enter your Password</p>';
-        blnError = true;
-      }
-
-      if (blnError == true) {
-        Swal.fire({
-          title: 'Error!',
-          icon: 'error',
-          html: strErrorMessage,
-        });
-      } else {
-        Swal.fire({
-          title: 'Success!',
-          icon: 'success',
-          html: 'Account created successfully',
-        });
-      }
+      $('#divLogin').slideToggle();
+      $('#divDashboard').slideToggle();
     });
 
     $('#btnCreateAccount').on('click', function () {
