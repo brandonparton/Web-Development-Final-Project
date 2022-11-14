@@ -99,6 +99,9 @@
     input:focus~.bar:after {
       width: 50%;
     }
+    .hidden {
+      display: none !important;
+    }
   </style>
   <title>Final Project</title>
 </head>
@@ -175,8 +178,8 @@
           </div>
         </div>
       </div>
-      <div id="divSettings" class="col py-3 d-none">
-        <span class="fs-5 d-sm-inline" style="display: none;">Settings</span>
+      <div id="divSettings" class="col py-3" style="display: none;">
+        <span class="fs-5 d-sm-inline">Settings</span>
       </div>
     </div>
   </div>
@@ -385,7 +388,7 @@
     $("#btnNavSettings").on("click", function () {
       console.log("Settings");
       if (!settingsActive) {
-        $("#divDashboard").hide();
+        $("#divDashboard").attr("style", "display: none !important");
         $("#divSettings").show();
         dashboardActive = false;
         settingsActive = true;
