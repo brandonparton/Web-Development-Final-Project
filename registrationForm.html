@@ -142,26 +142,42 @@
           </div>
         </div>
       </div>
-      <div id="divDashboard" class="col py-3">
-        <div class="row w-auto justify-content-evenly">
-          <div class="col-md-3">
-            <div class="card col-2" style="padding: 10px"></div>
+      <div id="divDashboard" class="col py-3 d-flex justify-content-center">
+        <div class="card col-md-10 col-8" style="background-color: none;">
+          <div class="row d-flex justify-content-center" style="padding-left: 5%;">
+            <div class="col-3">
+              <div class="card col-10">
+                <span>Total Eggs Harvested:</span>
+                <h2>3894</h2>
+              </div>
+            </div>
+            <div class="col-3">
+              <div class="card col-10">
+                <span>Current Temperature</span>
+                <h2>56°</h2>
+              </div>
+            </div>
+            <div class="col-3">
+              <div class="card col-10">
+                <span>Current Humidity</span>
+                <h2>46%</h2>
+              </div>
+            </div>
+            <div class="col-3">
+              <div class="card col-10">
+                <span>Days Until Next Cleanout</span>
+                <h2 id="cleanoutDay"></h2>
+              </div>
+            </div>
           </div>
-          <div class="col-md-3">
-            <div class="card col-2" style="padding: 10px"></div>
+          <div>
+            <canvas id="myChart" height="100vh" style="background-color: rgba(255, 255, 255, 0.45);"></canvas>
           </div>
-          <div class="col-md-3">
-            <div class="card col-2" style="padding: 10px"></div>
-          </div>
-          <div class="col-md-3">
-            <div class="card col-2" style="padding: 10px"></div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="card col-md-12"></div>
         </div>
       </div>
-      <div id="divWarnings" class="col py-3 d-none"></div>
+      <div id="divSettings" class="col py-3 d-none">
+        <span class="fs-5 d-sm-inline" style="display: none;">Settings</span>
+      </div>
     </div>
   </div>
 
@@ -332,7 +348,11 @@
   <script src="js/lib/bootstrap.bundle.min.js"></script>
   <script src="js/lib/jquery-3.6.1.min.js"></script>
   <script src="js/lib/sweetalert2.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script>
+    let dashboardActive = true;
+    let settingsActive = false;
+
     $("#btnCreateAccountLinker").on("click", function () {
       $("#divRegister").slideToggle();
       $("#divLogin").slideToggle();
@@ -353,9 +373,31 @@
       $("#divHome").slideToggle();
     });
     /* Side Bar Buttons */
-    $("#btnNavDashBoard").on("click", function () { });
-    $("#btnNavSettings").on("click", function () { });
-    $("#btnNavWarnings").on("click", function () { });
+    $("#btnNavDashBoard").on("click", function () {
+      console.log("Dashboard");
+      if (!dashboardActive) {
+        $("#divDashboard").show();
+        $("#divSettings").hide();
+        dashboardActive = true;
+        settingsActive = false;
+      }
+    });
+    $("#btnNavSettings").on("click", function () {
+      console.log("Settings");
+      if (!settingsActive) {
+        $("#divDashboard").hide();
+        $("#divSettings").show();
+        dashboardActive = false;
+        settingsActive = true;
+      }
+    });
+    $("#btnNavWarnings").on("click", function () {
+      Swal.fire({
+        title: 'You have 3 warnings',
+        icon: 'warning',
+        confirmButtonText: 'Ok'
+      })
+    });
     $("#btnNavLogout").on("click", function () {
       $("#divLogin").slideToggle();
       $("#divHome").slideToggle();
@@ -438,6 +480,75 @@
         });
       }
     });
+  </script>
+  <script>
+    const labels = [
+      'Sunday',
+      'Monday',
+      'Tuesday',
+      'Wednesday',
+      'Thursday',
+      'Friday',
+      'Saturday'
+    ];
+
+    const data = {
+      labels: labels,
+      datasets: [{
+        label: 'Humidity',
+        backgroundColor: 'rgb(255, 99, 132)',
+        borderColor: 'rgb(255, 99, 132)',
+        data: [50, 47, 48, 56, 41, 40, 53],
+      },
+      {
+        label: 'Temperature',
+        backgroundColor: 'rgb(0, 99, 132)',
+        borderColor: 'rgb(0, 99, 132)',
+        data: [73, 69, 74, 72, 65, 63, 58],
+      },
+      ]
+    };
+
+    const config = {
+      type: 'line',
+      data: data,
+      options: {}
+    };
+  </script>
+  <script>
+    const myChart = new Chart(
+      document.getElementById('myChart'),
+      config
+    );
+  </script>
+  <script>
+    // Set the date we're counting down to
+    var countDownDate = new Date("Jan 15, 2023 15:37:25").getTime();
+
+    // Update the count down every 1 second
+    var x = setInterval(function () {
+
+      // Get today's date and time
+      var now = new Date().getTime();
+
+      // Find the distance between now and the count down date
+      var distance = countDownDate - now;
+
+      // Time calculations for days, hours, minutes and seconds
+      var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      // Display the result in the element with id="demo"
+      document.getElementById("cleanoutDay").innerHTML = days + " Days"
+
+      // If the count down is finished, write some text
+      if (distance < 0) {
+        clearInterval(x);
+        document.getElementById("cleanoutDay").innerHTML = "EXPIRED";
+      }
+    }, 1000);
   </script>
 </body>
 
