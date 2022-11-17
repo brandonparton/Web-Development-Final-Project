@@ -179,7 +179,39 @@
         </div>
       </div>
       <div id="divSettings" class="col py-3" style="display: none;">
-        <span class="fs-5 d-sm-inline">Settings</span>
+        <div id="divDashboard" class="col py-3 d-flex justify-content-center">
+          <div class="card col-md-10 col-8" style="background-color: none;">
+            <div class="row d-flex justify-content-center" style="padding-left: 5%;">
+              <div class="col-3">
+                <div class="card col-10">
+                  <span>Total Eggs Harvested:</span>
+                  <h2>3894</h2>
+                </div>
+              </div>
+              <div class="col-3">
+                <div class="card col-10">
+                  <span>Current Temperature</span>
+                  <h2>56°</h2>
+                </div>
+              </div>
+              <div class="col-3">
+                <div class="card col-10">
+                  <span>Current Humidity</span>
+                  <h2>46%</h2>
+                </div>
+              </div>
+              <div class="col-3">
+                <div class="card col-10">
+                  <span>Days Until Next Cleanout</span>
+                  <h2 id="cleanoutDay"></h2>
+                </div>
+              </div>
+            </div>
+            <div>
+              <canvas id="myChart" height="100vh" style="background-color: rgba(255, 255, 255, 0.45);"></canvas>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
