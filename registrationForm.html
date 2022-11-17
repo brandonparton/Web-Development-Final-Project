@@ -99,6 +99,7 @@
     input:focus~.bar:after {
       width: 50%;
     }
+
     .hidden {
       display: none !important;
     }
@@ -109,7 +110,7 @@
 <body>
   <div id="divHome" class="container-fluid px-1 mx-auto" style="display: none">
     <div class="row flex-nowrap">
-      <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
+      <div id="divSideNav" class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
         <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
           <span class="fs-5 d-none d-sm-inline">Chicken Coop</span>
           <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
@@ -145,90 +146,31 @@
           </div>
         </div>
       </div>
-      <div id="divDashboard" class="col py-3 d-flex justify-content-center">
-        <div class="card col-md-10 col-8" style="background-color: none;">
-          <div class="row d-flex justify-content-center" style="padding-left: 5%;">
-            <div class="col-3">
-              <div class="card col-10">
-                <span>Total Eggs Harvested:</span>
-                <h2>3894</h2>
-              </div>
-            </div>
-            <div class="col-3">
-              <div class="card col-10">
-                <span>Current Temperature</span>
-                <h2>56°</h2>
-              </div>
-            </div>
-            <div class="col-3">
-              <div class="card col-10">
-                <span>Current Humidity</span>
-                <h2>46%</h2>
-              </div>
-            </div>
-            <div class="col-3">
-              <div class="card col-10">
-                <span>Days Until Next Cleanout</span>
-                <h2 id="cleanoutDay"></h2>
-              </div>
-            </div>
-          </div>
-          <div>
-            <canvas id="myChart" height="100vh" style="background-color: rgba(255, 255, 255, 0.45);"></canvas>
-          </div>
-        </div>
-      </div>
-      <div id="divSettings" class="col py-3" style="display: none;">
+      <div id="divContent" class="col py-3 d-flex justify-content-center">
         <div id="divDashboard" class="col py-3 d-flex justify-content-center">
           <div class="card col-md-10 col-8" style="background-color: none;">
             <div class="row d-flex justify-content-center" style="padding-left: 5%;">
               <div class="col-3">
                 <div class="card col-10">
-                  <span>Coop Door</span>
+                  <span>Total Eggs Harvested:</span>
                   <h2>3894</h2>
                 </div>
               </div>
               <div class="col-3">
                 <div class="card col-10">
-                  <span>Coop Light</span>
+                  <span>Current Temperature</span>
                   <h2>56°</h2>
                 </div>
               </div>
               <div class="col-3">
                 <div class="card col-10">
-                  <span>Temperature</span>
+                  <span>Current Humidity</span>
                   <h2>46%</h2>
                 </div>
               </div>
               <div class="col-3">
                 <div class="card col-10">
-                  <span>Alarms</span>
-                  <h2 id="cleanoutDay"></h2>
-                </div>
-              </div>
-            </div>
-            <div class="row d-flex justify-content-center" style="padding-left: 5%;">
-              <div class="col-3">
-                <div class="card col-10">
-                  <span>Coop Door</span>
-                  <h2>3894</h2>
-                </div>
-              </div>
-              <div class="col-3">
-                <div class="card col-10">
-                  <span>Coop Light</span>
-                  <h2>56°</h2>
-                </div>
-              </div>
-              <div class="col-3">
-                <div class="card col-10">
-                  <span>Temperature</span>
-                  <h2>46%</h2>
-                </div>
-              </div>
-              <div class="col-3">
-                <div class="card col-10">
-                  <span>Alarms</span>
+                  <span>Days Until Next Cleanout</span>
                   <h2 id="cleanoutDay"></h2>
                 </div>
               </div>
@@ -238,7 +180,69 @@
             </div>
           </div>
         </div>
+        <div id="divSettings" class="col py-3" style="display: none;">
+          <div id="divDashboard" class="col py-3 d-flex justify-content-center">
+            <div class="card col-md-10 col-8" style="background-color: none;">
+              <div class="row d-flex justify-content-center" style="padding-left: 5%;">
+                <div class="col-3">
+                  <div class="card col-10">
+                    <span>Coop Door</span>
+                    <h2>3894</h2>
+                  </div>
+                </div>
+                <div class="col-3">
+                  <div class="card col-10">
+                    <span>Coop Light</span>
+                    <h2>56°</h2>
+                  </div>
+                </div>
+                <div class="col-3">
+                  <div class="card col-10">
+                    <span>Temperature</span>
+                    <h2>46%</h2>
+                  </div>
+                </div>
+                <div class="col-3">
+                  <div class="card col-10">
+                    <span>Alarms</span>
+                    <h2 id="cleanoutDay"></h2>
+                  </div>
+                </div>
+              </div>
+              <div class="row d-flex justify-content-center" style="padding-left: 5%;">
+                <div class="col-3">
+                  <div class="card col-10">
+                    <span>Coop Door</span>
+                    <h2>3894</h2>
+                  </div>
+                </div>
+                <div class="col-3">
+                  <div class="card col-10">
+                    <span>Coop Light</span>
+                    <h2>56°</h2>
+                  </div>
+                </div>
+                <div class="col-3">
+                  <div class="card col-10">
+                    <span>Temperature</span>
+                    <h2>46%</h2>
+                  </div>
+                </div>
+                <div class="col-3">
+                  <div class="card col-10">
+                    <span>Alarms</span>
+                    <h2 id="cleanoutDay"></h2>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <canvas id="myChart" height="100vh" style="background-color: rgba(255, 255, 255, 0.45);"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
+
     </div>
   </div>
 
