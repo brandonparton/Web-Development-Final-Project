@@ -55,6 +55,16 @@
     }
 
     .card {
+      border: none;
+      box-shadow: 0 18px 22px 0 rgba(0, 0, 0, 0.2);
+      background: rgba(255, 255, 255, 0.4);
+      border-radius: 16px;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(6.4px);
+      -webkit-backdrop-filter: blur(6.4px);
+    }
+
+    .card2 {
       padding: 30px 40px;
       margin-top: 60px;
       margin-bottom: 60px;
@@ -147,9 +157,9 @@
         </div>
       </div>
       <div id="divContent" class="col py-3 d-flex justify-content-center">
-        <div id="divDashboard" class="col py-3 d-flex justify-content-center">
-          <div class="card col-md-10 col-8" style="background-color: none;">
-            <div class="row d-flex justify-content-center" style="padding-left: 5%;">
+        <div id="divDashboard" class="col py-3 d-flex justify-content-center align-items-center ">
+          <div class="card col-md-10 col-8 h-auto" style="background-color: none;">
+            <div class="row d-flex justify-content-center m-3">
               <div class="col-3">
                 <div class="card col-10">
                   <span>Total Eggs Harvested:</span>
@@ -175,15 +185,15 @@
                 </div>
               </div>
             </div>
-            <div>
-              <canvas id="myChart" height="100vh" style="background-color: rgba(255, 255, 255, 0.45);"></canvas>
+            <div class="m-3">
+              <canvas id="myChart" style="background-color: rgba(255, 255, 255, 0.45);"></canvas>
             </div>
           </div>
         </div>
         <div id="divSettings" class="col py-3" style="display: none;">
           <div id="divDashboard" class="col py-3 d-flex justify-content-center">
             <div class="card col-md-10 col-8" style="background-color: none;">
-              <div class="row d-flex justify-content-center" style="padding-left: 5%;">
+              <div class="row d-flex justify-content-center p-3">
                 <div class="col-3">
                   <div class="card col-10">
                     <span>Coop Door</span>
@@ -208,35 +218,31 @@
                     <h2 id="cleanoutDay"></h2>
                   </div>
                 </div>
-              </div>
-              <div class="row d-flex justify-content-center" style="padding-left: 5%;">
+
                 <div class="col-3">
-                  <div class="card col-10">
+                  <div class="card col-10 mt-3">
                     <span>Coop Door</span>
                     <h2>3894</h2>
                   </div>
                 </div>
                 <div class="col-3">
-                  <div class="card col-10">
+                  <div class="card col-10 mt-3">
                     <span>Coop Light</span>
                     <h2>56°</h2>
                   </div>
                 </div>
                 <div class="col-3">
-                  <div class="card col-10">
+                  <div class="card col-10 mt-3">
                     <span>Temperature</span>
                     <h2>46%</h2>
                   </div>
                 </div>
                 <div class="col-3">
-                  <div class="card col-10">
+                  <div class="card col-10 mt-3">
                     <span>Alarms</span>
                     <h2 id="cleanoutDay"></h2>
                   </div>
                 </div>
-              </div>
-              <div>
-                <canvas id="myChart" height="100vh" style="background-color: rgba(255, 255, 255, 0.45);"></canvas>
               </div>
             </div>
           </div>
@@ -249,7 +255,7 @@
   <div id="divLogin" class="container-fluid px-1 py-5 mx-auto">
     <div class="row d-flex justify-content-center">
       <div class="col-xl-7 col-lg-8 col-md-9 col-11 text-center">
-        <div class="card rounded-5">
+        <div class="card card2 rounded-5">
           <div class="container-fluid">
             <h1 style="letter-spacing: 4px"><b>LOGIN</b></h1>
           </div>
@@ -289,7 +295,7 @@
   <div id="divRegister" class="container-fluid px-1 py-5 mx-auto" style="display: none">
     <div class="row d-flex justify-content-center">
       <div class="col-xl-7 col-lg-8 col-md-9 col-11 text-center">
-        <div class="card rounded-5">
+        <div class="card card2 rounded-5">
           <div class="container-fluid">
             <h1 style="letter-spacing: 4px"><b>REGISTER</b></h1>
           </div>
