@@ -193,54 +193,85 @@
         <div id="divSettings" class="col py-3" style="display: none;">
           <div id="divDashboard" class="col py-3 d-flex justify-content-center">
             <div class="card col-md-10 col-8" style="background-color: none;">
-              <div class="row d-flex justify-content-center p-3">
-                <div class="col-3">
-                  <div class="card col-10">
+              <h1>Settings</h1>
+              <div class="row d-flex p-3">
+                <div class="col-4">
+                  <div class="card col-12">
                     <span>Coop Door</span>
-                    <h2>3894</h2>
+                    <div class="input-group mb-3">
+                      <label class="input-group-text" for="openTimeDoor">Automatic Open Time</label>
+                      <input id="openTimeDoor" type="time" class="form-control" id="timeInput" placeholder="Time" aria-label="Time"
+                        aria-describedby="basic-addon2">
+                    </div>
+                    <div class="input-group mb-3">
+                      <label class="input-group-text" for="closeTimeDoor">Automatic Close Time</label>
+                      <input id="closeTimeDoor" type="time" class="form-control" id="timeInput" placeholder="Time" aria-label="Time"
+                        aria-describedby="basic-addon2">
+                    </div>
+                    <div class="row d-flex justify-content-center p-3">
+                      <button>Manual Open</button>
+                      <button>Manual Close</button>
+                    </div>
                   </div>
                 </div>
-                <div class="col-3">
-                  <div class="card col-10">
+                <div class="col-4">
+                  <div class="card col-12">
                     <span>Coop Light</span>
-                    <h2>56°</h2>
+                    <div class="input-group mb-3">
+                      <label class="input-group-text" for="onTimeLight">Automatic On Time</label>
+                      <input id="onTimeLight" type="time" class="form-control" id="timeInput" placeholder="Time" aria-label="Time"
+                        aria-describedby="basic-addon2">
+                    </div>
+                    <div class="input-group mb-3">
+                      <label class="input-group-text" for="offTimeLight">Automatic Off Time</label>
+                      <input id="offTimeLight" type="time" class="form-control" id="timeInput" placeholder="Time" aria-label="Time"
+                        aria-describedby="basic-addon2">
+                    </div>
+                    <div class="row d-flex justify-content-center p-3">
+                      <button>Manual Light On</button>
+                      <button>Manual Light Close</button>
+                    </div>
                   </div>
                 </div>
-                <div class="col-3">
-                  <div class="card col-10">
-                    <span>Temperature</span>
-                    <h2>46%</h2>
-                  </div>
-                </div>
-                <div class="col-3">
-                  <div class="card col-10">
+                <div class="col-4">
+                  <div class="card col-10" style="height: 171%;">
                     <span>Alarms</span>
-                    <h2 id="cleanoutDay"></h2>
+                    <div class="row d-flex justify-content-center p-3" style="height: 50%;">
+                      <h4>LOW FOOD ALARM</h4>
+                      <i class="fa-sharp fa-solid fa-check-to-slot" style="font-size: 4em;"></i>
+                    </div>
+                    <div class="row d-flex justify-content-center p-3" style="height: 50%;">
+                      <h4>LOW WATER ALARM</h4>
+                      <i class="fa-sharp fa-solid fa-check-to-slot" style="font-size: 4em;"></i>
+                    </div>
                   </div>
                 </div>
-
-                <div class="col-3">
-                  <div class="card col-10 mt-3">
-                    <span>Coop Door</span>
-                    <h2>3894</h2>
+              </div>
+              <div class="row d-flex p-3">
+                <div class="col-4">
+                  <div class="card col-12">
+                    <span>Coop Heater</span>
+                    <div class="input-group mb-3">
+                      <label class="input-group-text" for="openTimeDoor">Heater On Temperature</label>
+                      <input id="openTimeDoor" type="time" class="form-control" id="timeInput" placeholder="Time" aria-label="Time"
+                        aria-describedby="basic-addon2">
+                    </div>
+                    <div class="row d-flex justify-content-center p-3">
+                      <button>Heater On</button>
+                    </div>
                   </div>
                 </div>
-                <div class="col-3">
-                  <div class="card col-10 mt-3">
-                    <span>Coop Light</span>
-                    <h2>56°</h2>
-                  </div>
-                </div>
-                <div class="col-3">
-                  <div class="card col-10 mt-3">
-                    <span>Temperature</span>
-                    <h2>46%</h2>
-                  </div>
-                </div>
-                <div class="col-3">
-                  <div class="card col-10 mt-3">
-                    <span>Alarms</span>
-                    <h2 id="cleanoutDay"></h2>
+                <div class="col-4">
+                  <div class="card col-12">
+                    <span>Coop Fan</span>
+                    <div class="input-group mb-3">
+                      <label class="input-group-text" for="onTimeLight">Fan On Temperature</label>
+                      <input id="onTimeLight" type="time" class="form-control" id="timeInput" placeholder="Time" aria-label="Time"
+                        aria-describedby="basic-addon2">
+                    </div>
+                    <div class="row d-flex justify-content-center p-3">
+                      <button>Fan On</button>
+                    </div>
                   </div>
                 </div>
               </div>
