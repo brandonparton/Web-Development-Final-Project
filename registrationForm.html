@@ -198,38 +198,42 @@
                 <div class="col-4">
                   <div class="card col-12">
                     <span>Coop Door</span>
-                    <div class="input-group mb-3">
+                    <div class="input-group mb-3 justify-content-center">
                       <label class="input-group-text" for="openTimeDoor">Automatic Open Time</label>
                       <input id="openTimeDoor" type="time" class="form-control" id="timeInput" placeholder="Time" aria-label="Time"
                         aria-describedby="basic-addon2">
                     </div>
-                    <div class="input-group mb-3">
+                    <div class="input-group mb-3 justify-content-center">
                       <label class="input-group-text" for="closeTimeDoor">Automatic Close Time</label>
                       <input id="closeTimeDoor" type="time" class="form-control" id="timeInput" placeholder="Time" aria-label="Time"
                         aria-describedby="basic-addon2">
                     </div>
-                    <div class="row d-flex justify-content-center p-3">
-                      <button>Manual Open</button>
-                      <button>Manual Close</button>
+                    <div class="row d-flex justify-content-center p-3" style="margin: 0 auto;">
+                      <div class="form-check form-switch text-center justify-content-center">
+                        <input class="form-check-input" type="checkbox" role="switch"                     id="switchCoopDoor" checked="checked"/>
+                        <label class="form-check-label" for="switchCoopDoor">Open</label>
+                      </div>
                     </div>
                   </div>
                 </div>
                 <div class="col-4">
                   <div class="card col-12">
                     <span>Coop Light</span>
-                    <div class="input-group mb-3">
+                    <div class="input-group mb-3 justify-content-center">
                       <label class="input-group-text" for="onTimeLight">Automatic On Time</label>
                       <input id="onTimeLight" type="time" class="form-control" id="timeInput" placeholder="Time" aria-label="Time"
                         aria-describedby="basic-addon2">
                     </div>
-                    <div class="input-group mb-3">
+                    <div class="input-group mb-3 justify-content-center">
                       <label class="input-group-text" for="offTimeLight">Automatic Off Time</label>
                       <input id="offTimeLight" type="time" class="form-control" id="timeInput" placeholder="Time" aria-label="Time"
                         aria-describedby="basic-addon2">
                     </div>
-                    <div class="row d-flex justify-content-center p-3">
-                      <button>Manual Light On</button>
-                      <button>Manual Light Close</button>
+                    <div class="row d-flex justify-content-center p-3" style="margin: 0 auto;">
+                      <div class="form-check form-switch text-center justify-content-center">
+                        <input class="form-check-input" type="checkbox" role="switch"                     id="switchCoopLight" checked="checked"/>
+                        <label class="form-check-label" for="switchCoopLight">On</label>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -257,7 +261,9 @@
                         aria-describedby="basic-addon2">
                     </div>
                     <div class="row d-flex justify-content-center p-3">
-                      <button>Heater On</button>
+                      <button>Heater Timer</button>
+                      <input id="onTimeLight" type="time" class="form-control" id="timeInput" placeholder="Time" aria-label="Time"
+                        aria-describedby="basic-addon2">
                     </div>
                   </div>
                 </div>
@@ -270,7 +276,9 @@
                         aria-describedby="basic-addon2">
                     </div>
                     <div class="row d-flex justify-content-center p-3">
-                      <button>Fan On</button>
+                      <button>Fan Timer</button>
+                      <input id="onTimeLight" type="time" class="form-control" id="timeInput" placeholder="Time" aria-label="Time"
+                        aria-describedby="basic-addon2">
                     </div>
                   </div>
                 </div>
@@ -279,7 +287,6 @@
           </div>
         </div>
       </div>
-
     </div>
   </div>
 
@@ -583,6 +590,7 @@
       }
     });
   </script>
+
   <script>
     const labels = [
       'Sunday',
@@ -651,6 +659,29 @@
         document.getElementById("cleanoutDay").innerHTML = "EXPIRED";
       }
     }, 1000);
+  </script>
+  <script>
+    $('#switchCoopDoor').change(function(){
+      if ($("#switchCoopDoor").is(':checked'))
+      {
+          $("label[for='switchCoopDoor']").text("Open");
+      }
+      else
+      {
+          $("label[for='switchCoopDoor']").text("Closed");
+      }
+    });
+
+  $('#switchCoopLight').change(function(){
+    if ($("#switchCoopLight").is(':checked'))
+    {
+        $("label[for='switchCoopLight']").text("On");
+    }
+    else
+    {
+        $("label[for='switchCoopLight']").text("Off");
+    }
+  });
   </script>
 </body>
 
