@@ -297,6 +297,7 @@
           <div class="container-fluid">
             <h1 style="letter-spacing: 4px"><b>LOGIN</b></h1>
           </div>
+          <form action="" method="POST">
           <div class="form-group flex-column d-flex">
             <label class="form-control-label px-3">Email</label>
             <input type="text" id="loginEmail" name="loginEmail" placeholder="email@example.com" />
@@ -320,6 +321,7 @@
                 </button>
               </div>
             </div>
+          </form>
             <hr />
             <button type="button" class="btn" id="btnCreateAccountLinker"
               style="background-color: #5a3719; color: white; width: 20%">
@@ -459,17 +461,37 @@
   <script src="js/lib/sweetalert2.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script>
+
     let dashboardActive = true;
     let settingsActive = false;
 
     $("#btnCreateAccountLinker").on("click", function () {
-      $("#divRegister").slideToggle();
-      $("#divLogin").slideToggle();
+      let frmNewUser = document.querySelector('form')
+      let valid = frmNewUser.reportValidity();
+      $.post("https://simplecoop.swollenhippo.com/coop.php", { coopID:strCoopID })
+          .done(function(data) {
+          console.log(data);
+          let objResult = JSON.parse(data);
+          let outcome = objResult.Outcome
+          console.log(outcome);
+      
+      if(valid == true){
+          console.log("Valid Form")
+          Swal.fire('NEW USER CREATED')
+          $("#divRegister").slideToggle();
+          $("#divLogin").slideToggle();
+      }
+      else{
+          console.log("Invalid Form")
+          Swal.fire('Please Fill Out All Boxes')
+      }
+      });
     });
 
     $("#btnReturnLogin").on("click", function () {
       $("#divLogin").slideToggle();
       $("#divRegister").slideToggle();
+      
     });
 
     $("#diffAddressCheck").on("change", function () {
