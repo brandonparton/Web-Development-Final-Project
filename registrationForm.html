@@ -373,13 +373,13 @@
               <div class="row justify-content-between text-left">
                 <div class="form-group col-sm-6 flex-column d-flex">
                   <label class="form-control-label px-3">Address Line 1</label>
-                  <input type="text" id="inputAdress1" name="address-1"
+                  <input type="text" id="inputAddress1" name="address-1"
                     placeholder="Street address, P.O. Box, Company Name, etc" />
                   <span class="bar"></span>
                 </div>
                 <div class="form-group col-sm-6 flex-column d-flex">
                   <label class="form-control-label px-3">Address Line 2</label>
-                  <input type="text" id="inputAdress2" name="address-2" placeholder="Apartment, Suite , Unit, etc" />
+                  <input type="text" id="inputAddress2" name="address-2" placeholder="Apartment, Suite , Unit, etc" />
                   <span class="bar"></span>
                 </div>
                 <div class="form-group col-sm-6 flex-column d-flex">
@@ -410,13 +410,13 @@
               <div class="row justify-content-between text-left">
                 <div class="form-group col-sm-6 flex-column d-flex">
                   <label class="form-control-label px-3">Address Line 1</label>
-                  <input type="text" id="inputCoopAdress1" name="address-1"
+                  <input type="text" id="inputCoopd1" name="address-1"
                     placeholder="Street address, P.O. box, company name, c/o" />
                   <span class="bar"></span>
                 </div>
                 <div class="form-group col-sm-6 flex-column d-flex">
                   <label class="form-control-label px-3">Address Line 2</label>
-                  <input type="text" id="inputCoopAdress2" name="address-2"
+                  <input type="text" id="inputCoopd2" name="address-2"
                     placeholder="Apartment, suite , unit, building, floor, etc" />
                   <span class="bar"></span>
                 </div>
@@ -461,47 +461,48 @@
   <script src="js/lib/sweetalert2.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script>
-
     let dashboardActive = true;
     let settingsActive = false;
+    let base_url = "https://simplecoop.swollenhippo.com/"
+    let coopID = ''
+    let strSessionID = ''
 
     $("#btnCreateAccountLinker").on("click", function () {
-      let frmNewUser = document.querySelector('form')
-      let valid = frmNewUser.reportValidity();
-      $.post("https://simplecoop.swollenhippo.com/coop.php", { coopID:strCoopID })
-          .done(function(data) {
-          console.log(data);
-          let objResult = JSON.parse(data);
-          let outcome = objResult.Outcome
-          console.log(outcome);
-      
-      if(valid == true){
-          console.log("Valid Form")
-          Swal.fire('NEW USER CREATED')
-          $("#divRegister").slideToggle();
-          $("#divLogin").slideToggle();
-      }
-      else{
-          console.log("Invalid Form")
-          Swal.fire('Please Fill Out All Boxes')
-      }
-      });
+      $("#divRegister").slideToggle();
+      $("#divLogin").slideToggle();
     });
 
     $("#btnReturnLogin").on("click", function () {
       $("#divLogin").slideToggle();
       $("#divRegister").slideToggle();
-      
     });
 
     $("#diffAddressCheck").on("change", function () {
       console.log($(this).is(":checked"));
       $("#coopInfo").slideToggle();
     });
-
+    
     $("#btnLogin").on("click", function () {
-      $("#divLogin").slideToggle();
-      $("#divHome").slideToggle();
+      let strEmail = $("#loginEmail").val();
+      let strPassword = $("#loginPassword").val();
+      $.post(base_url+"sessions.php",{Email:strEmail,Password:strPassword}).done(function(data){
+        console.log(data);
+                let objResult = JSON.parse(data);
+                let outcome = objResult.Outcome;
+                if(outcome != "Bad Username or Password"){
+                  sessionStorage.setItem("SessionID", data);
+                  strSessionID = sessionStorage.getItem("SessionID");
+                  $("#divLogin").slideToggle();
+                  $("#divHome").slideToggle();
+                }
+                else{
+                  Swal.fire({
+                    title: "Error!",
+                    icon: "error",
+                    html: "Invalid Username or Password",
+        });
+                }
+              });
     });
     /* Side Bar Buttons */
     $("#btnNavDashBoard").on("click", function () {
@@ -579,7 +580,7 @@
         blnError = true;
       }
       if ($("#diffAddressCheck").is(":checked")) {
-        if ($("#inputCoopAdress1").val() == "") {
+        if ($("#inputCoopAddress1").val() == "") {
           strErrorMessage += "<p>Please enter your coop address</p>";
           blnError = true;
         }
@@ -597,6 +598,16 @@
         }
       }
 
+      let strEmail = $("#inputEmail").val();
+      let strFirstName = $("#inputFirstName").val();
+      let strLastName = $("#inputLastName").val();
+      let strPassword = $("#inputPassword").val();
+      let strStreet1 = $("#inputAddress1").val();
+      let strStreet2 = $("#inputAddress2").val();
+      let strCity = $("#inputCity").val();
+      let strState = $("#inputState").val();
+      let strZIP = $("#inputZipcode").val();
+
       if (blnError == true) {
         Swal.fire({
           title: "Error!",
@@ -609,10 +620,45 @@
           icon: "success",
           html: "Account created successfully",
         });
+        $.post(base_url+"coop.php")
+            .done(function(data) {
+              coopID = data;
+        });
+        $.post(base_url+"users.php",{Email:strEmail,Password:strPassword,FirstName:strFirstName, LastName:strLastName, CoopID:coopID}).done(function(data){
+            console.log(data);
+            let objResult = JSON.parse(data);
+            let outcome = objResult.Outcome;
+            console.log(outcome);
+            if(outcome == "New User Created"){
+              $.post(base_url+"useraddress.php",{Email:strEmail,Street1:strStreet1, Street2:strStreet2, City:strCity, State:strState, ZIP: strZIP}).done(function(data){
+                console.log(data);
+                console.log(coopID);
+              });
+              $.post(base_url+"sessions.php",{Email:strEmail,Password:strPassword}).done(function(data){
+                sessionStorage.setItem("SessionID", data);
+                strSessionID = sessionStorage.getItem("SessionID");
+                console.log(strSessionID);
+              });
+              if ($("#diffAddressCheck").is(":checked")) {
+                strStreet1 = $("#inputCoopAddress1").val();
+                strStreet2 = $("#inputCoopAddress2").val();
+                strCity = $("#inputCoopCity").val();
+                strState = $("#inputCoopState").val();
+                strZIP = $("#inputCoopZipcode").val();
+              }
+              $.ajax({
+                url: base_url+"coop.php",
+                type: 'PUT',
+                data: {SessionID:strSessionID,Street1:strStreet1, Street2:strStreet2, City:strCity, State:strState, ZIP: strZIP },
+                success: function(data) {
+                  console.log(data);
+                }
+              });
+          }
+        });
       }
     });
   </script>
-
   <script>
     const labels = [
       'Sunday',
@@ -681,29 +727,6 @@
         document.getElementById("cleanoutDay").innerHTML = "EXPIRED";
       }
     }, 1000);
-  </script>
-  <script>
-    $('#switchCoopDoor').change(function(){
-      if ($("#switchCoopDoor").is(':checked'))
-      {
-          $("label[for='switchCoopDoor']").text("Open");
-      }
-      else
-      {
-          $("label[for='switchCoopDoor']").text("Closed");
-      }
-    });
-
-  $('#switchCoopLight').change(function(){
-    if ($("#switchCoopLight").is(':checked'))
-    {
-        $("label[for='switchCoopLight']").text("On");
-    }
-    else
-    {
-        $("label[for='switchCoopLight']").text("Off");
-    }
-  });
   </script>
 </body>
 
