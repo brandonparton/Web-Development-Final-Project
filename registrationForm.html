@@ -717,7 +717,8 @@
       $('.settingClass').each(function (i, obj) {
         strSettings = $(this).attr("data-settings");
         $.get(base_url + "settings.php", { SessionID: strSessionID, setting: strSettings }).done(function (data) {
-          console.log(data)
+          let objValue = JSON.parse(data);
+          //$(this).val() = objValue.Value;
         });
       });
     });
