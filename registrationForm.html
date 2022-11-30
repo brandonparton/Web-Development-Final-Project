@@ -340,6 +340,7 @@
           <div class="card col-md-10 col-8 h-auto justify-content-center" style="background-color: none;">
             <div class="row justify-content-evenly">
                 <div class="card col-9 dashCard">
+                  <h6>Add E</h6>
                   <h6>Total Eggs:</h6>
                   <h4>3894</h4>
                 </div>
@@ -486,12 +487,13 @@
       let strEmail = $("#loginEmail").val();
       let strPassword = $("#loginPassword").val();
       $.post(base_url+"sessions.php",{Email:strEmail,Password:strPassword}).done(function(data){
-        console.log(data);
                 let objResult = JSON.parse(data);
                 let outcome = objResult.Outcome;
                 if(outcome != "Bad Username or Password"){
-                  sessionStorage.setItem("SessionID", data);
+                  sessionStorage.setItem("SessionID", objResult.SessionID);
                   strSessionID = sessionStorage.getItem("SessionID");
+                  console.log(objResult.SessionID);
+                  console.log(strSessionID);
                   $("#divLogin").slideToggle();
                   $("#divHome").slideToggle();
                 }
@@ -615,7 +617,7 @@
             let objResult = JSON.parse(data);
             let outcome = objResult.Outcome;
             if(outcome == "New User Created"){
-              $("#divLogin").slideToggle();
+              $("#divRegister").slideToggle();
               $("#divHome").slideToggle();
               $.post(base_url+"useraddress.php",{Email:strEmail,Street1:strStreet1, Street2:strStreet2, City:strCity, State:strState, ZIP: strZIP});
               $.post(base_url+"sessions.php",{Email:strEmail,Password:strPassword}).done(function(data){
@@ -661,6 +663,7 @@
       $.post(base_url+"environment.php",{SessionID:strSessionID,observationDateTime:strobDateTime, temperature:strTemp, humidity:strHumidity}).done(function(data){
             let objResult = JSON.parse(data);
             let outcome = objResult.Outcome;
+
             console.log(outcome);
         });
         $.get(base_url+"environment.php",{SessionID:strSessionID,days:strobDateTime}).done(function(data){
@@ -674,25 +677,12 @@
     $("#btnAddEggs").on("click", function () {
       let strEggs = $('#inputAddEggs').val();
       let strobDateTime = new Date();
-
-      <!--NEED TO HAVE ARRAY, DAYS IS WEIRD, POST NOT ADDING EGGS.-->
-
-
       $.post(base_url+"eggs.php",{SessionID:strSessionID,observationDateTime:strobDateTime, eggs:strEggs}).done(function(data){
             let objResult = JSON.parse(data);
             let outcome = objResult.Outcome;
             console.log(outcome);
-            LogID = outcome;
-            $.ajax({
-                url: base_url+"eggs.php",
-                type: 'PUT',
-                data: {SessionID:strSessionID,LogID:LogID},
-                success: function(data) {
-                  console.log(data);
-                }
-              });
         });
-        $.get(base_url+"eggs.php",{SessionID:strSessionID,days:strobDateTime}).done(function(data){
+        $.getJSON(base_url+"eggs.php",{SessionID:strSessionID,days:7}).done(function(data){
               console.log(data);
         });
     });
@@ -708,7 +698,7 @@
       }
       let strSettings = '';
       let strValue = '';
-      $.get(base_url+"settings.php",{SessionID:strSessionID,  setting:"onTempHeater"}).done(function(data){
+      $.get(base_url+"settings.php",{SessionID:strSessionID, setting:"onTempHeater"}).done(function(data){
         console.log(data)
       });
     });
@@ -721,19 +711,19 @@
         strValue = $(obj).val();
         console.log(strSettings);
         console.log(strValue);
+        console.log(strSessionID);
+        $.post('https://simplecoop.swollenhippo.com/settings.php',{SessionID:strSessionID,setting:strSettings, value:strValue}).done(function(data){
+          console.log(data);
+        })
 
-        $.post(base_url+"settings.php",{SessionID:strSessionID,setting:strSettings, value:strValue}).done(function(data){
-          console.log(data)
-        });
-
-        $.ajax({
-          url: base_url+"settings.php",
-          type: 'PUT',
-          data: {SessionID:strSessionID,setting:strSettings, value:strValue},
-          success: function(data) {
-            console.log(data);
-          }
-        });
+        // $.ajax({
+        //   url: base_url+"settings.php",
+        //   type: 'PUT',
+        //   data: {SessionID:strSessionID,setting:strSettings, value:strValue},
+        //   success: function(data) {
+        //     console.log(data);
+        //   }
+        // });
       });
     });
 
