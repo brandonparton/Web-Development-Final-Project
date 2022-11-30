@@ -613,34 +613,48 @@
         });
         $.post(base_url + "coop.php")
           .done(function (data) {
-            coopID = data;
+            let objResult = JSON.parse(data);
+            coopID = objResult.CoopID;
+
+            $.post(base_url + "users.php", { Email: strEmail, Password: strPassword, FirstName: strFirstName, LastName: strLastName, CoopID: coopID }
+            ).done(function (data) {
+              let objResult = JSON.parse(data);
+              let outcome = objResult.Outcome;
+              if (outcome == "New User Created") {
+                $("#divRegister").slideToggle();
+                $("#divHome").slideToggle();
+                $.post(base_url + "useraddress.php", { Email: strEmail, Street1: strStreet1, Street2: strStreet2, City: strCity, State: strState, ZIP: strZIP });
+                $.post(base_url + "sessions.php", { Email: strEmail, Password: strPassword }).done(function (data) {
+                  sessionStorage.setItem("SessionID", JSON.parse(data).SessionID);
+                  strSessionID = sessionStorage.getItem("SessionID");
+
+                  if ($("#diffAddressCheck").is(":checked")) {
+                    strStreet1 = $("#inputCoopAddress1").val();
+                    strStreet2 = $("#inputCoopAddress2").val();
+                    strCity = $("#inputCoopCity").val();
+                    strState = $("#inputCoopState").val();
+                    strZIP = $("#inputCoopZipcode").val();
+                  }
+                  $.ajax({
+                    type: 'PUT',
+                    url: base_url + "coop.php",
+                    contentType: 'application/json',
+                    data: { SessionID: strSessionID, Street1: strStreet1, Street2: strStreet2, City: strCity, State: strState, ZIP: strZIP },
+                    success: function (data) { }
+                  });
+                  let strSettings = '';
+                  let strValue = '';
+                  $('.settingClass').each(function (i, obj) {
+                    strSettings = $(this).attr("data-settings");
+                    strValue = $(obj).val();
+                    $.post('https://simplecoop.swollenhippo.com/settings.php', { SessionID: strSessionID, setting: strSettings, value: "0" }).done(function (data) {
+                      console.log(data);
+                    })
+                  });
+                });
+              }
+            });
           });
-        $.post(base_url + "users.php", { Email: strEmail, Password: strPassword, FirstName: strFirstName, LastName: strLastName, CoopID: coopID }).done(function (data) {
-          let objResult = JSON.parse(data);
-          let outcome = objResult.Outcome;
-          if (outcome == "New User Created") {
-            $("#divRegister").slideToggle();
-            $("#divHome").slideToggle();
-            $.post(base_url + "useraddress.php", { Email: strEmail, Street1: strStreet1, Street2: strStreet2, City: strCity, State: strState, ZIP: strZIP });
-            $.post(base_url + "sessions.php", { Email: strEmail, Password: strPassword }).done(function (data) {
-              sessionStorage.setItem("SessionID", data);
-              strSessionID = sessionStorage.getItem("SessionID");
-            });
-            if ($("#diffAddressCheck").is(":checked")) {
-              strStreet1 = $("#inputCoopAddress1").val();
-              strStreet2 = $("#inputCoopAddress2").val();
-              strCity = $("#inputCoopCity").val();
-              strState = $("#inputCoopState").val();
-              strZIP = $("#inputCoopZipcode").val();
-            }
-            $.ajax({
-              url: base_url + "coop.php",
-              type: 'PUT',
-              data: { SessionID: strSessionID, Street1: strStreet1, Street2: strStreet2, City: strCity, State: strState, ZIP: strZIP },
-              success: function (data) { }
-            });
-          }
-        });
       }
     });
 
@@ -714,18 +728,16 @@
       $('.settingClass').each(function (i, obj) {
         strSettings = $(this).attr("data-settings");
         strValue = $(obj).val();
-        $.post('https://simplecoop.swollenhippo.com/settings.php', { SessionID: strSessionID, setting: strSettings, value: strValue }).done(function (data) {
-          console.log(data);
-        })
 
-        // $.ajax({
-        //   url: base_url+"settings.php",
-        //   type: 'PUT',
-        //   data: {SessionID:strSessionID,setting:strSettings, value:strValue},
-        //   success: function(data) {
-        //     console.log(data);
-        //   }
-        // });
+        $.ajax({
+          type: 'PUT',
+          url: base_url+"settings.php",
+          contentType: 'application/json',
+          data: {SessionID:strSessionID,setting:strSettings, value:strValue},
+          success: function(data) {
+            console.log(data);
+          }
+        });
       });
     });
 
