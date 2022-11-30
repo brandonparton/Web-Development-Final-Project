@@ -700,8 +700,11 @@
       }
       let strSettings = '';
       let strValue = '';
-      $.get(base_url + "settings.php", { SessionID: strSessionID, setting: "onTempHeater" }).done(function (data) {
-        console.log(data)
+      $('.settingClass').each(function (i, obj) {
+        strSettings = $(this).attr("data-settings");
+        $.get(base_url + "settings.php", { SessionID: strSessionID, setting: strSettings }).done(function (data) {
+          console.log(data)
+        });
       });
     });
 
@@ -711,9 +714,6 @@
       $('.settingClass').each(function (i, obj) {
         strSettings = $(this).attr("data-settings");
         strValue = $(obj).val();
-        console.log(strSettings);
-        console.log(strValue);
-        console.log(strSessionID);
         $.post('https://simplecoop.swollenhippo.com/settings.php', { SessionID: strSessionID, setting: strSettings, value: strValue }).done(function (data) {
           console.log(data);
         })
