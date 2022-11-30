@@ -99,6 +99,12 @@
     input:focus~.bar:after {
       width: 50%;
     }
+
+    .dashCard{
+      width:150px;
+      height:150px;
+    }
+
     .hidden {
       display: none !important;
     }
@@ -107,181 +113,7 @@
 </head>
 
 <body>
-  <div id="divHome" class="container-fluid px-1 mx-auto" style="display: none">
-    <div class="row flex-nowrap">
-      <div id="divSideNav" class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
-        <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
-          <span class="fs-5 d-none d-sm-inline">Chicken Coop</span>
-          <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
-            <li>
-              <button id="btnNavDashBoard" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
-                <i class="fa-solid fa-table-columns"></i>
-                <span class="ms-1 d-none d-sm-inline">Dashboard</span>
-              </button>
-            </li>
-            <li>
-              <button id="btnNavSettings" class="nav-link px-0 align-middle">
-                <i class="fa-solid fa-gear"></i>
-                <span class="ms-1 d-none d-sm-inline">Settings</span>
-              </button>
-            </li>
-            <li>
-              <button id="btnNavWarnings" class="nav-link px-0 align-middle">
-                <i class="fa-solid fa-triangle-exclamation"></i>
-                <span class="ms-1 d-none d-sm-inline">Warnings</span>
-              </button>
-            </li>
-          </ul>
-          <hr />
-          <div class="pb-4">
-            <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start">
-              <li>
-                <button id="btnNavLogout" class="nav-link px-0 align-middle">
-                  <i class="fa-solid fa-arrow-right-from-bracket"></i>
-                  <span class="ms-1 d-none d-sm-inline">Log out</span>
-                </button>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-      <div id="divContent" class="col py-3 d-flex justify-content-center">
-        <div id="divDashboard" class="col py-3 d-flex justify-content-center align-items-center ">
-          <div class="card col-md-10 col-8 h-auto" style="background-color: none;">
-            <div class="row d-flex justify-content-center m-3">
-              <div class="col-3">
-                <div class="card col-10">
-                  <span>Total Eggs Harvested:</span>
-                  <h2>3894</h2>
-                </div>
-              </div>
-              <div class="col-3">
-                <div class="card col-10">
-                  <span>Current Temperature</span>
-                  <h2>56°</h2>
-                </div>
-              </div>
-              <div class="col-3">
-                <div class="card col-10">
-                  <span>Current Humidity</span>
-                  <h2>46%</h2>
-                </div>
-              </div>
-              <div class="col-3">
-                <div class="card col-10">
-                  <span>Days Until Next Cleanout</span>
-                  <h2 id="cleanoutDay"></h2>
-                </div>
-              </div>
-            </div>
-            <div class="m-3">
-              <canvas id="myChart" style="background-color: rgba(255, 255, 255, 0.45);"></canvas>
-            </div>
-          </div>
-        </div>
-        <div id="divSettings" class="col py-3" style="display: none;">
-          <div id="divDashboard" class="col py-3 d-flex justify-content-center">
-            <div class="card col-md-10 col-8" style="background-color: none;">
-              <h1>Settings</h1>
-              <div class="row d-flex p-3">
-                <div class="col-4">
-                  <div class="card col-12">
-                    <span>Coop Door</span>
-                    <div class="input-group mb-3 justify-content-center">
-                      <label class="input-group-text" for="openTimeDoor">Automatic Open Time</label>
-                      <input id="openTimeDoor" class="settingClass" type="time" class="form-control" placeholder="Time" aria-label="Time"
-                        aria-describedby="basic-addon2">
-                    </div>
-                    <div class="input-group mb-3 justify-content-center">
-                      <label class="input-group-text" for="closeTimeDoor">Automatic Close Time</label>
-                      <input id="closeTimeDoor" class="settingClass" type="time" class="form-control" placeholder="Time" aria-label="Time"
-                        aria-describedby="basic-addon2">
-                    </div>
-                    <div class="row d-flex justify-content-center p-3" style="margin: 0 auto;">
-                      <div class="form-check form-switch text-center justify-content-center">
-                        <input class="form-check-input" type="checkbox" role="switch" id="switchCoopDoor" checked="checked"/>
-                        <label class="form-check-label" for="switchCoopDoor">Open</label>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-4">
-                  <div class="card col-12">
-                    <span>Coop Light</span>
-                    <div class="input-group mb-3 justify-content-center">
-                      <label class="input-group-text" for="onTimeLight">Automatic On Time</label>
-                      <input id="onTimeLight" class="settingClass" type="time" class="form-control" placeholder="Time" aria-label="Time"
-                        aria-describedby="basic-addon2">
-                    </div>
-                    <div class="input-group mb-3 justify-content-center">
-                      <label class="input-group-text" for="offTimeLight">Automatic Off Time</label>
-                      <input id="offTimeLight" class="settingClass" type="time" class="form-control" placeholder="Time" aria-label="Time"
-                        aria-describedby="basic-addon2">
-                    </div>
-                    <div class="row d-flex justify-content-center p-3" style="margin: 0 auto;">
-                      <div class="form-check form-switch text-center justify-content-center">
-                        <input class="form-check-input" type="checkbox" role="switch"                     id="switchCoopLight" checked="checked"/>
-                        <label class="form-check-label" for="switchCoopLight">On</label>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-4">
-                  <div class="card col-10" style="height: 171%;">
-                    <span>Alarms</span>
-                    <div class="row d-flex justify-content-center p-3" style="height: 50%;">
-                      <h4>LOW FOOD ALARM</h4>
-                      <i class="fa-sharp fa-solid fa-check-to-slot" style="font-size: 4em;"></i>
-                    </div>
-                    <div class="row d-flex justify-content-center p-3" style="height: 50%;">
-                      <h4>LOW WATER ALARM</h4>
-                      <i class="fa-sharp fa-solid fa-check-to-slot" style="font-size: 4em;"></i>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="row d-flex p-3">
-                <div class="col-4">
-                  <div class="card col-12">
-                    <span>Coop Heater</span>
-                    <div class="input-group mb-3">
-                      <label class="input-group-text" for="openTimeDoor">Heater On Temperature</label>
-                      <input id="openTimeDoor" class="settingClass" type="time" class="form-control" placeholder="Time" aria-label="Time"
-                        aria-describedby="basic-addon2">
-                    </div>
-                    <div class="row d-flex justify-content-center p-3">
-                      <button>Heater Timer</button>
-                      <input id="onTimeLight" class="settingClass" type="time" class="form-control" placeholder="Time" aria-label="Time"
-                        aria-describedby="basic-addon2">
-                    </div>
-                  </div>
-                </div>
-                <div class="col-4">
-                  <div class="card col-12">
-                    <span>Coop Fan</span>
-                    <div class="input-group mb-3">
-                      <label class="input-group-text" for="onTimeLight">Fan On Temperature</label>
-                      <input id="onTimeLight" class="settingClass" type="time" class="form-control" placeholder="Time" aria-label="Time"
-                        aria-describedby="basic-addon2">
-                    </div>
-                    <div class="row d-flex justify-content-center p-3">
-                      <button>Fan Timer</button>
-                      <input id="onTimeLight" class="settingClass" type="time" class="form-control" placeholder="Time" aria-label="Time"
-                        aria-describedby="basic-addon2">
-                    </div>
-                  </div>
-                  <button type="button" class="btn" id="btnSaveSettings" style="background-color: #bc6c25; color: white">
-                    Save Settings
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
+  <!--LOGIN DIV-->
   <div id="divLogin" class="container-fluid px-1 py-5 mx-auto">
     <div class="row d-flex justify-content-center">
       <div class="col-xl-7 col-lg-8 col-md-9 col-11 text-center">
@@ -322,6 +154,8 @@
       </div>
     </div>
   </div>
+
+  <!--REGISTER DIV-->
   <div id="divRegister" class="container-fluid px-1 py-5 mx-auto" style="display: none">
     <div class="row d-flex justify-content-center">
       <div class="col-xl-7 col-lg-8 col-md-9 col-11 text-center">
@@ -329,7 +163,6 @@
           <div class="container-fluid">
             <h1 style="letter-spacing: 4px"><b>REGISTER</b></h1>
           </div>
-
           <h5 class="text-center mb-4">User Info</h5>
           <form class="form-card">
             <div id="genInfo">
@@ -436,7 +269,7 @@
                 <div>
                   Already have an account?
                   <button type="button" id="btnReturnLogin" style="background-color: transparent; color: #bc6c25">
-                    Log 
+                    Log In
                   </button>
                 </div>
               </div>
@@ -446,33 +279,201 @@
       </div>
     </div>
   </div>
+
+  <!--HOMEPAGE DIV-->
+  <div id="divHome" class="container-fluid px-1 mx-auto" style="display: none">
+    <div class="row flex-nowrap">
+      <div id="divSideNav" class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
+        <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
+          <span class="fs-5 d-none d-sm-inline">Chicken Coop</span>
+          <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
+            <li>
+              <button id="btnNavDashBoard" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
+                <i class="fa-solid fa-table-columns"></i>
+                <span class="ms-1 d-none d-sm-inline">Dashboard</span>
+              </button>
+            </li>
+            <li>
+              <button id="btnNavSettings" class="nav-link px-0 align-middle">
+                <i class="fa-solid fa-gear"></i>
+                <span class="ms-1 d-none d-sm-inline">Settings</span>
+              </button>
+            </li>
+            <li>
+              <button id="btnNavWarnings" class="nav-link px-0 align-middle">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+                <span class="ms-1 d-none d-sm-inline">Warnings</span>
+              </button>
+            </li>
+          </ul>
+          <hr />
+          <div class="pb-4">
+            <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start">
+              <li>
+                <button id="btnNavLogout" class="nav-link px-0 align-middle">
+                  <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                  <span class="ms-1 d-none d-sm-inline">Log out</span>
+                </button>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="divContent" class="col py-3 d-flex justify-content-center">
+        <div id="divDashboard" class="col py-3 d-flex justify-content-center align-items-center ">
+          <div class="card col-md-10 col-8 h-auto" style="background-color: none;">
+            <div class="row d-flex justify-content-center m-3">
+              <div class="col-3">
+                <div class="card col-10 dashCard">
+                  <span>Total Eggs Harvested:</span>
+                  <h2>3894</h2>
+                </div>
+              </div>
+              <div class="col-3">
+                <div class="card col-10 dashCard">
+                  <span>Current Temperature</span>
+                  <h2>56°</h2>
+                </div>
+              </div>
+              <div class="col-3">
+                <div class="card col-10 dashCard">
+                  <span>Current Humidity</span>
+                  <h2>46%</h2>
+                </div>
+              </div>
+              <div class="col-3">
+                <div class="card col-10 dashCard">
+                  <span>Days Until Next Cleanout</span>
+                  <h2 id="cleanoutDay"></h2>
+                </div>
+              </div>
+            </div>
+            <div class="m-3">
+              <canvas id="myChart" style="background-color: rgba(255, 255, 255, 0.45);"></canvas>
+            </div>
+          </div>
+        </div>
+        
+        <div id="divSettings" class="col py-3" style="display: none;">
+          <div id="div" class="col py-3 d-flex justify-content-center">
+            <div class="card col-md-10 col-8" style="background-color: none;">
+              <h1>Settings</h1>
+              <div class="row d-flex p-3">
+                <div class="col-4">
+                  <div class="card col-12">
+                    <span>Coop Door</span>
+                    <div class="input-group mb-3 justify-content-center">
+                      <label class="input-group-text" for="openTimeDoor">Automatic Open Time</label>
+                      <input data-settings="openTimeDoor" id="openTimeDoor" class="" type="time" class="form-control" placeholder="Time" aria-label="Time"
+                        aria-describedby="basic-addon2">
+                    </div>
+                    <div class="input-group mb-3 justify-content-center">
+                      <label class="input-group-text" for="closeTimeDoor">Automatic Close Time</label>
+                      <input data-settings="closeTimeDoor" id="closeTimeDoor" class="" type="time" class="form-control" placeholder="Time" aria-label="Time"
+                        aria-describedby="basic-addon2">
+                    </div>
+                    <div class="row d-flex justify-content-center p-3" style="margin: 0 auto;">
+                      <div class="form-check form-switch text-center justify-content-center">
+                        <input class="form-check-input" type="checkbox" role="switch" id="switchCoopDoor" checked="checked"/>
+                        <label class="form-check-label" for="switchCoopDoor">Open</label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-4">
+                  <div class="card col-12">
+                    <span>Coop Light</span>
+                    <div class="input-group mb-3 justify-content-center">
+                      <label class="input-group-text" for="onTimeLight">Automatic On Time</label>
+                      <input data-settings="onTimeLight" id="onTimeLight" class="settingClass" type="time" class="form-control" placeholder="Time" aria-label="Time"
+                        aria-describedby="basic-addon2">
+                    </div>
+                    <div class="input-group mb-3 justify-content-center">
+                      <label class="input-group-text" for="offTimeLight">Automatic Off Time</label>
+                      <input data-settings="offTimeLight" id="offTimeLight" class="settingClass" type="time" class="form-control" placeholder="Time" aria-label="Time"
+                        aria-describedby="basic-addon2">
+                    </div>
+                    <div class="row d-flex justify-content-center p-3" style="margin: 0 auto;">
+                      <div class="form-check form-switch text-center justify-content-center">
+                        <input class="form-check-input" type="checkbox" role="switch"                     id="switchCoopLight" checked="checked"/>
+                        <label class="form-check-label" for="switchCoopLight">On</label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-4">
+                  <div class="card col-10" style="height: 171%;">
+                    <span>Alarms</span>
+                    <div class="row d-flex justify-content-center p-3" style="height: 50%;">
+                      <h4>LOW FOOD ALARM</h4>
+                      <i class="fa-sharp fa-solid fa-check-to-slot" style="font-size: 4em;"></i>
+                    </div>
+                    <div class="row d-flex justify-content-center p-3" style="height: 50%;">
+                      <h4>LOW WATER ALARM</h4>
+                      <i class="fa-sharp fa-solid fa-check-to-slot" style="font-size: 4em;"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row d-flex p-3">
+                <div class="col-4">
+                  <div class="card col-12">
+                    <span>Coop Heater</span>
+                    <div class="input-group mb-3">
+                      <label class="input-group-text" for="onTempHeater">Heater On Temperature</label>
+                      <input data-settings="onTempHeater" id="onTempHeater" class="settingClass" class="form-control" placeholder="Time" aria-label="Time"
+                        aria-describedby="basic-addon2">
+                    </div>
+                    <div class="row d-flex justify-content-center p-3">
+                      <button>Heater Timer</button>
+                      <input data-settings="heaterTimer" id="heaterTimer" class="settingClass" type="time" class="form-control" placeholder="Time" aria-label="Time"
+                        aria-describedby="basic-addon2">
+                    </div>
+                  </div>
+                </div>
+                <div class="col-4">
+                  <div class="card col-12">
+                    <span>Coop Fan</span>
+                    <div class="input-group mb-3">
+                      <label class="input-group-text" for="onTempFan">Fan On Temperature</label>
+                      <input data-settings="onTempFan" id="onTempFan" class="settingClass" class="form-control" placeholder="Time" aria-label="Time"
+                        aria-describedby="basic-addon2">
+                    </div>
+                    <div class="row d-flex justify-content-center p-3">
+                      <button>Fan Timer</button>
+                      <input data-settings="lightTimer" id="lightTimer" class="settingClass" type="time" class="form-control" placeholder="Time" aria-label="Time"
+                        aria-describedby="basic-addon2">
+                    </div>
+                  </div>
+                  <button type="button" class="btn" id="btnSaveSettings" style="background-color: #bc6c25; color: white">
+                    Save Settings
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+
+  
   <script src="js/lib/bootstrap.bundle.min.js"></script>
   <script src="js/lib/jquery-3.6.1.min.js"></script>
   <script src="js/lib/sweetalert2.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
   <script>
     let dashboardActive = true;
     let settingsActive = false;
     let base_url = "https://simplecoop.swollenhippo.com/"
     let coopID = ''
     let strSessionID = ''
-    var arrEggs = [] 
 
-    $("#btnCreateAccountLinker").on("click", function () {
-      $("#divRegister").slideToggle();
-      $("#divLogin").slideToggle();
-    });
+    // Handling all Login Functions and CRUD Info///////////////
 
-    $("#btnReturnLogin").on("click", function () {
-      $("#divLogin").slideToggle();
-      $("#divRegister").slideToggle();
-    });
-
-    $("#diffAddressCheck").on("change", function () {
-      console.log($(this).is(":checked"));
-      $("#coopInfo").slideToggle();
-    });
-    
     $("#btnLogin").on("click", function () {
       let strEmail = $("#loginEmail").val();
       let strPassword = $("#loginPassword").val();
@@ -495,106 +496,37 @@
                 }
               });
     });
-    /* Side Bar Buttons */
-    $("#btnNavDashBoard").on("click", function () {
-      let strobDateTime = new Date();
-      let strHumidity = "High";
-      let strTemp = 76;
-      if (!dashboardActive) {
-        $("#divDashboard").show();
-        $("#divSettings").hide();
-        dashboardActive = true;
-        settingsActive = false;
-      }
-      $.post(base_url+"environment.php",{SessionID:strSessionID,observationDateTime:strobDateTime, temperature:strTemp, humidity:strHumidity}).done(function(data){
-            let objResult = JSON.parse(data);
-            let outcome = objResult.Outcome;
-            console.log(outcome);
-        });
-        $.get(base_url+"environment.php",{SessionID:strSessionID,days:strobDateTime}).done(function(data){
-              console.log(data);
-        });
-      
+
+    $("#btnReturnLogin").on("click", function () {
+      $("#divLogin").slideToggle();
+      $("#divRegister").slideToggle();
     });
 
-    $("#btnAddEggs").on("click", function () {
-      let strEggs = $('#inputAddEggs').val();
-      let strobDateTime = new Date();
-
-      <!--NEED TO HAVE ARRAY, DAYS IS WEIRD, POST NOT ADDING EGGS.-->
-
-
-      $.post(base_url+"eggs.php",{SessionID:strSessionID,observationDateTime:strobDateTime, eggs:strEggs}).done(function(data){
-            let objResult = JSON.parse(data);
-            let outcome = objResult.Outcome;
-            console.log(outcome);
-            LogID = outcome;
-            $.ajax({
-                url: base_url+"eggs.php",
-                type: 'PUT',
-                data: {SessionID:strSessionID,LogID:LogID},
-                success: function(data) {
-                  console.log(data);
-                }
-              });
-        });
-        $.get(base_url+"eggs.php",{SessionID:strSessionID,days:strobDateTime}).done(function(data){
-              console.log(data);
-        });
-    });
-
-
-    $("#btnNavSettings").on("click", function () {
-      if (!settingsActive) {
-        $("#divDashboard").attr("style", "display: none !important");
-        $("#divSettings").show();
-        dashboardActive = false;
-        settingsActive = true;;
-      }
-      $.get(base_url+"settings.php",{SessionID:strSessionID,setting:strSettings}).done(function(data){
-            // SHOULD RETURN ARRAY OF JSON OBJECTS!
-        });
-    });
-
-    $("#btnSaveSettings").on("click", function () {
-      let strSettings = '';
-      let strValue = '';
-      if("VALUES ARE DEFAULT"){
-      $.post(base_url+"settings.php",{SessionID:strSessionID,setting:strSettings, value:strValue}).done(function(data){
-            let objResult = JSON.parse(data);
-            let outcome = objResult.Outcome;
-            console.log(outcome);
-        });
-      }
-      $.ajax({
-                url: base_url+"settings.php",
-                type: 'PUT',
-                data: {SessionID:strSessionID,setting:strSettings, value:strValue},
-                success: function(data) {
-                  console.log(data);
-
-                  $.get(base_url+"settings.php",{SessionID:strSessionID,  setting:strSettings}).done(function(data){
-                    console.log(data);
-                  });
-                }
-              });
-      });
-
-    $("#btnNavWarnings").on("click", function () {
-      Swal.fire({
-        title: 'You have 3 warnings',
-        icon: 'warning',
-        confirmButtonText: 'Ok'
-      })
-    });
     $("#btnNavLogout").on("click", function () {
       $("#divLogin").slideToggle();
       $("#divHome").slideToggle();
+      sessionStorage.removeItem("SessionID");
     });
+
+    $("#btnCreateAccountLinker").on("click", function () {
+      $("#divRegister").slideToggle();
+      $("#divLogin").slideToggle();
+    });
+
 
     $("#btnCreateAccount").on("click", function () {
       let blnError = false;
       let strErrorMessage = "";
+
+      let strEmail = $("#inputEmail").val();
+      let strFirstName = $("#inputFirstName").val();
+      let strLastName = $("#inputLastName").val();
+      let strPassword = $("#inputPassword").val();
+      let strStreet1 = $("#inputAddress1").val();
+      let strStreet2 = $("#inputAddress2").val();
+      let strCity = $("#inputCity").val();
+      let strState = $("#inputState").val();
+      let strZIP = $("#inputZipcode").val();
 
       if ($("#inputFirstName").val() == "") {
         strErrorMessage += "<p>Please enter your first name</p>";
@@ -655,16 +587,6 @@
         }
       }
 
-      let strEmail = $("#inputEmail").val();
-      let strFirstName = $("#inputFirstName").val();
-      let strLastName = $("#inputLastName").val();
-      let strPassword = $("#inputPassword").val();
-      let strStreet1 = $("#inputAddress1").val();
-      let strStreet2 = $("#inputAddress2").val();
-      let strCity = $("#inputCity").val();
-      let strState = $("#inputState").val();
-      let strZIP = $("#inputZipcode").val();
-
       if (blnError == true) {
         Swal.fire({
           title: "Error!",
@@ -703,16 +625,123 @@
                 url: base_url+"coop.php",
                 type: 'PUT',
                 data: {SessionID:strSessionID,Street1:strStreet1, Street2:strStreet2, City:strCity, State:strState, ZIP: strZIP },
-                success: function(data) {
-                  console.log(data);
-                }
+                success: function(data) {}
               });
             }
           });
         }
       });
+
+
+    $("#diffAddressCheck").on("change", function () {
+      console.log($(this).is(":checked"));
+      $("#coopInfo").slideToggle();
+    });
+
+    // Handling Dashboard Naviagtion and CRUD Functions///////
+
+    $("#btnNavDashBoard").on("click", function () {
+      let strobDateTime = new Date();
+      let strHumidity = "High";
+      let strTemp = 76;
+      if (!dashboardActive) {
+        $("#divDashboard").show();
+        $("#divSettings").hide();
+        dashboardActive = true;
+        settingsActive = false;
+      }
+      $.post(base_url+"environment.php",{SessionID:strSessionID,observationDateTime:strobDateTime, temperature:strTemp, humidity:strHumidity}).done(function(data){
+            let objResult = JSON.parse(data);
+            let outcome = objResult.Outcome;
+            console.log(outcome);
+        });
+        $.get(base_url+"environment.php",{SessionID:strSessionID,days:strobDateTime}).done(function(data){
+              console.log(data);
+        });
+      
+    });
+
+    // Handling Egg CRUD Functions//////
+
+    $("#btnAddEggs").on("click", function () {
+      let strEggs = $('#inputAddEggs').val();
+      let strobDateTime = new Date();
+
+      <!--NEED TO HAVE ARRAY, DAYS IS WEIRD, POST NOT ADDING EGGS.-->
+
+
+      $.post(base_url+"eggs.php",{SessionID:strSessionID,observationDateTime:strobDateTime, eggs:strEggs}).done(function(data){
+            let objResult = JSON.parse(data);
+            let outcome = objResult.Outcome;
+            console.log(outcome);
+            LogID = outcome;
+            $.ajax({
+                url: base_url+"eggs.php",
+                type: 'PUT',
+                data: {SessionID:strSessionID,LogID:LogID},
+                success: function(data) {
+                  console.log(data);
+                }
+              });
+        });
+        $.get(base_url+"eggs.php",{SessionID:strSessionID,days:strobDateTime}).done(function(data){
+              console.log(data);
+        });
+    });
+
+    // Handling all Setting CRUD Functions//////
+
+    $("#btnNavSettings").on("click", function () {
+      if (!settingsActive) {
+        $("#divDashboard").attr("style", "display: none !important");
+        $("#divSettings").show();
+        dashboardActive = false;
+        settingsActive = true;;
+      }
+      let strSettings = '';
+      let strValue = '';
+      $.get(base_url+"settings.php",{SessionID:strSessionID,  setting:"onTempHeater"}).done(function(data){
+        console.log(data)
+      });
+    });
+
+    $("#btnSaveSettings").on("click", function () {
+      let strSettings = '';
+      let strValue = '';
+      $('.settingClass').each(function(i, obj) {
+        strSettings = $(this).attr("data-settings");
+        strValue = $(obj).val();
+        console.log(strSettings);
+        console.log(strValue);
+
+        $.post(base_url+"settings.php",{SessionID:strSessionID,setting:strSettings, value:strValue}).done(function(data){
+          console.log(data)
+        });
+
+        $.ajax({
+          url: base_url+"settings.php",
+          type: 'PUT',
+          data: {SessionID:strSessionID,setting:strSettings, value:strValue},
+          success: function(data) {
+            console.log(data);
+          }
+        });
+      });
+    });
+
+    $("#btnNavWarnings").on("click", function () {
+      Swal.fire({
+        title: 'You have 3 warnings',
+        icon: 'warning',
+        confirmButtonText: 'Ok'
+      })
+    });
+
+    
   </script>
+
   <script>
+    <!--All Info needed for Graph. -->
     const labels = [
       'Sunday',
       'Monday',
