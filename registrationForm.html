@@ -189,17 +189,17 @@
                     <span>Coop Door</span>
                     <div class="input-group mb-3 justify-content-center">
                       <label class="input-group-text" for="openTimeDoor">Automatic Open Time</label>
-                      <input id="openTimeDoor" type="time" class="form-control" id="timeInput" placeholder="Time" aria-label="Time"
+                      <input id="openTimeDoor" class="settingClass" type="time" class="form-control" placeholder="Time" aria-label="Time"
                         aria-describedby="basic-addon2">
                     </div>
                     <div class="input-group mb-3 justify-content-center">
                       <label class="input-group-text" for="closeTimeDoor">Automatic Close Time</label>
-                      <input id="closeTimeDoor" type="time" class="form-control" id="timeInput" placeholder="Time" aria-label="Time"
+                      <input id="closeTimeDoor" class="settingClass" type="time" class="form-control" placeholder="Time" aria-label="Time"
                         aria-describedby="basic-addon2">
                     </div>
                     <div class="row d-flex justify-content-center p-3" style="margin: 0 auto;">
                       <div class="form-check form-switch text-center justify-content-center">
-                        <input class="form-check-input" type="checkbox" role="switch"                     id="switchCoopDoor" checked="checked"/>
+                        <input class="form-check-input" type="checkbox" role="switch" id="switchCoopDoor" checked="checked"/>
                         <label class="form-check-label" for="switchCoopDoor">Open</label>
                       </div>
                     </div>
@@ -210,12 +210,12 @@
                     <span>Coop Light</span>
                     <div class="input-group mb-3 justify-content-center">
                       <label class="input-group-text" for="onTimeLight">Automatic On Time</label>
-                      <input id="onTimeLight" type="time" class="form-control" id="timeInput" placeholder="Time" aria-label="Time"
+                      <input id="onTimeLight" class="settingClass" type="time" class="form-control" placeholder="Time" aria-label="Time"
                         aria-describedby="basic-addon2">
                     </div>
                     <div class="input-group mb-3 justify-content-center">
                       <label class="input-group-text" for="offTimeLight">Automatic Off Time</label>
-                      <input id="offTimeLight" type="time" class="form-control" id="timeInput" placeholder="Time" aria-label="Time"
+                      <input id="offTimeLight" class="settingClass" type="time" class="form-control" placeholder="Time" aria-label="Time"
                         aria-describedby="basic-addon2">
                     </div>
                     <div class="row d-flex justify-content-center p-3" style="margin: 0 auto;">
@@ -246,12 +246,12 @@
                     <span>Coop Heater</span>
                     <div class="input-group mb-3">
                       <label class="input-group-text" for="openTimeDoor">Heater On Temperature</label>
-                      <input id="openTimeDoor" type="time" class="form-control" id="timeInput" placeholder="Time" aria-label="Time"
+                      <input id="openTimeDoor" class="settingClass" type="time" class="form-control" placeholder="Time" aria-label="Time"
                         aria-describedby="basic-addon2">
                     </div>
                     <div class="row d-flex justify-content-center p-3">
                       <button>Heater Timer</button>
-                      <input id="onTimeLight" type="time" class="form-control" id="timeInput" placeholder="Time" aria-label="Time"
+                      <input id="onTimeLight" class="settingClass" type="time" class="form-control" placeholder="Time" aria-label="Time"
                         aria-describedby="basic-addon2">
                     </div>
                   </div>
@@ -261,12 +261,12 @@
                     <span>Coop Fan</span>
                     <div class="input-group mb-3">
                       <label class="input-group-text" for="onTimeLight">Fan On Temperature</label>
-                      <input id="onTimeLight" type="time" class="form-control" id="timeInput" placeholder="Time" aria-label="Time"
+                      <input id="onTimeLight" class="settingClass" type="time" class="form-control" placeholder="Time" aria-label="Time"
                         aria-describedby="basic-addon2">
                     </div>
                     <div class="row d-flex justify-content-center p-3">
                       <button>Fan Timer</button>
-                      <input id="onTimeLight" type="time" class="form-control" id="timeInput" placeholder="Time" aria-label="Time"
+                      <input id="onTimeLight" class="settingClass" type="time" class="form-control" placeholder="Time" aria-label="Time"
                         aria-describedby="basic-addon2">
                     </div>
                   </div>
@@ -446,289 +446,6 @@
       </div>
     </div>
   </div>
-  <script src="js/lib/bootstrap.bundle.min.js"></script>
-  <script src="js/lib/jquery-3.6.1.min.js"></script>
-  <script src="js/lib/sweetalert2.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script>
-    let dashboardActive = true;
-    let settingsActive = false;
-    let base_url = "https://simplecoop.swollenhippo.com/"
-    let coopID = ''
-    let strSessionID = ''
-
-    $("#btnCreateAccountLinker").on("click", function () {
-      $("#divRegister").slideToggle();
-      $("#divLogin").slideToggle();
-    });
-
-    $("#btnReturnLogin").on("click", function () {
-      $("#divLogin").slideToggle();
-      $("#divRegister").slideToggle();
-    });
-
-    $("#diffAddressCheck").on("change", function () {
-      console.log($(this).is(":checked"));
-      $("#coopInfo").slideToggle();
-    });
-    
-    $("#btnLogin").on("click", function () {
-      let strEmail = $("#loginEmail").val();
-      let strPassword = $("#loginPassword").val();
-      $.post(base_url+"sessions.php",{Email:strEmail,Password:strPassword}).done(function(data){
-        console.log(data);
-                let objResult = JSON.parse(data);
-                let outcome = objResult.Outcome;
-                if(outcome != "Bad Username or Password"){
-                  sessionStorage.setItem("SessionID", data);
-                  strSessionID = sessionStorage.getItem("SessionID");
-                  $("#divLogin").slideToggle();
-                  $("#divHome").slideToggle();
-                }
-                else{
-                  Swal.fire({
-                    title: "Error!",
-                    icon: "error",
-                    html: "Invalid Username or Password",
-        });
-                }
-              });
-    });
-    /* Side Bar Buttons */
-    $("#btnNavDashBoard").on("click", function () {
-      console.log("Dashboard");
-      if (!dashboardActive) {
-        $("#divDashboard").show();
-        $("#divSettings").hide();
-        dashboardActive = true;
-        settingsActive = false;
-      }
-    });
-
-    $("#btnNavSettings").on("click", function () {
-      if (!settingsActive) {
-        $("#divDashboard").attr("style", "display: none !important");
-        $("#divSettings").show();
-        dashboardActive = false;
-        settingsActive = true;;
-      }
-    });
-
-    $("#btnSaveSettings").on("click", function () {
-      let strSettings = 'A';
-      let strValue = 'B';
-      $.post(base_url+"settings.php",{SessionID:strSessionID,setting:strSettings, value:strValue}).done(function(data){
-            let objResult = JSON.parse(data);
-            let outcome = objResult.Outcome;
-            console.log(outcome);
-        });
-      });
-
-    $("#btnNavWarnings").on("click", function () {
-      Swal.fire({
-        title: 'You have 3 warnings',
-        icon: 'warning',
-        confirmButtonText: 'Ok'
-      })
-    });
-    $("#btnNavLogout").on("click", function () {
-      $("#divLogin").slideToggle();
-      $("#divHome").slideToggle();
-    });
-
-    $("#btnCreateAccount").on("click", function () {
-      let blnError = false;
-      let strErrorMessage = "";
-
-      if ($("#inputFirstName").val() == "") {
-        strErrorMessage += "<p>Please enter your first name</p>";
-        blnError = true;
-      }
-      if ($("#inputLastName").val() == "") {
-        strErrorMessage += "<p>Please enter your last name</p>";
-        blnError = true;
-      }
-      if (
-        !/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(
-          $("#inputEmail").val()
-        )
-      ) {
-        strErrorMessage += "<p>Please enter a valid email</p>";
-        blnError = true;
-      }
-      if (
-        !/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,64}$/.test(
-          $("#inputPassword").val()
-        )
-      ) {
-        strErrorMessage += "<p>Please enter a valid password</p>";
-        blnError = true;
-      }
-      if ($("#inputAddress1").val() == "") {
-        strErrorMessage += "<p>Please enter your address</p>";
-        blnError = true;
-      }
-      if ($("#inputCity").val() == "") {
-        strErrorMessage += "<p>Please enter your city</p>";
-        blnError = true;
-      }
-      if ($("#inputState").val() == "") {
-        strErrorMessage += "<p>Please enter your state</p>";
-        blnError = true;
-      }
-      if ($("#inputZipcode").val() == "") {
-        strErrorMessage += "<p>Please enter your zipcode</p>";
-        blnError = true;
-      }
-      if ($("#diffAddressCheck").is(":checked")) {
-        if ($("#inputCoopAddress1").val() == "") {
-          strErrorMessage += "<p>Please enter your coop address</p>";
-          blnError = true;
-        }
-        if ($("#inputCoopCity").val() == "") {
-          strErrorMessage += "<p>Please enter your coop city</p>";
-          blnError = true;
-        }
-        if ($("#inputCoopState").val() == "") {
-          strErrorMessage += "<p>Please enter your coop state</p>";
-          blnError = true;
-        }
-        if ($("#inputCoopZipcode").val() == "") {
-          strErrorMessage += "<p>Please enter your coop zipcode</p>";
-          blnError = true;
-        }
-      }
-
-      let strEmail = $("#inputEmail").val();
-      let strFirstName = $("#inputFirstName").val();
-      let strLastName = $("#inputLastName").val();
-      let strPassword = $("#inputPassword").val();
-      let strStreet1 = $("#inputAddress1").val();
-      let strStreet2 = $("#inputAddress2").val();
-      let strCity = $("#inputCity").val();
-      let strState = $("#inputState").val();
-      let strZIP = $("#inputZipcode").val();
-
-      if (blnError == true) {
-        Swal.fire({
-          title: "Error!",
-          icon: "error",
-          html: strErrorMessage,
-        });
-      } else {
-        Swal.fire({
-          title: "Success!",
-          icon: "success",
-          html: "Account created successfully",
-        });
-        $.post(base_url+"coop.php")
-            .done(function(data) {
-              coopID = data;
-        });
-        $.post(base_url+"users.php",{Email:strEmail,Password:strPassword,FirstName:strFirstName, LastName:strLastName, CoopID:coopID}).done(function(data){
-            console.log(data);
-            let objResult = JSON.parse(data);
-            let outcome = objResult.Outcome;
-            console.log(outcome);
-            if(outcome == "New User Created"){
-              $.post(base_url+"useraddress.php",{Email:strEmail,Street1:strStreet1, Street2:strStreet2, City:strCity, State:strState, ZIP: strZIP}).done(function(data){
-                console.log(data);
-                console.log(coopID);
-              });
-              $.post(base_url+"sessions.php",{Email:strEmail,Password:strPassword}).done(function(data){
-                sessionStorage.setItem("SessionID", data);
-                strSessionID = sessionStorage.getItem("SessionID");
-                console.log(strSessionID);
-              });
-              if ($("#diffAddressCheck").is(":checked")) {
-                strStreet1 = $("#inputCoopAddress1").val();
-                strStreet2 = $("#inputCoopAddress2").val();
-                strCity = $("#inputCoopCity").val();
-                strState = $("#inputCoopState").val();
-                strZIP = $("#inputCoopZipcode").val();
-              }
-              $.ajax({
-                url: base_url+"coop.php",
-                type: 'PUT',
-                data: {SessionID:strSessionID,Street1:strStreet1, Street2:strStreet2, City:strCity, State:strState, ZIP: strZIP },
-                success: function(data) {
-                  console.log(data);
-                }
-              });
-          }
-        });
-      }
-    });
-  </script>
-  <script>
-    const labels = [
-      'Sunday',
-      'Monday',
-      'Tuesday',
-      'Wednesday',
-      'Thursday',
-      'Friday',
-      'Saturday'
-    ];
-
-    const data = {
-      labels: labels,
-      datasets: [{
-        label: 'Humidity',
-        backgroundColor: 'rgb(255, 99, 132)',
-        borderColor: 'rgb(255, 99, 132)',
-        data: [50, 47, 48, 56, 41, 40, 53],
-      },
-      {
-        label: 'Temperature',
-        backgroundColor: 'rgb(0, 99, 132)',
-        borderColor: 'rgb(0, 99, 132)',
-        data: [73, 69, 74, 72, 65, 63, 58],
-      },
-      ]
-    };
-
-    const config = {
-      type: 'line',
-      data: data,
-      options: {}
-    };
-  </script>
-  <script>
-    const myChart = new Chart(
-      document.getElementById('myChart'),
-      config
-    );
-  </script>
-  <script>
-    // Set the date we're counting down to
-    var countDownDate = new Date("Jan 15, 2023 15:37:25").getTime();
-
-    // Update the count down every 1 second
-    var x = setInterval(function () {
-
-      // Get today's date and time
-      var now = new Date().getTime();
-
-      // Find the distance between now and the count down date
-      var distance = countDownDate - now;
-
-      // Time calculations for days, hours, minutes and seconds
-      var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-      // Display the result in the element with id="demo"
-      document.getElementById("cleanoutDay").innerHTML = days + " Days"
-
-      // If the count down is finished, write some text
-      if (distance < 0) {
-        clearInterval(x);
-        document.getElementById("cleanoutDay").innerHTML = "EXPIRED";
-      }
-    }, 1000);
-  </script>
 </body>
 
 </html>
