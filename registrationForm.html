@@ -38,7 +38,7 @@
     button {
       padding: 8px 15px;
       border-radius: 5px !important;
-      margin: 5px 0px;
+      margin: 0px 0px;
       box-sizing: border-box;
       border: none;
       font-size: 18px !important;
@@ -147,7 +147,7 @@
           </div>
           <div class="row justify-content-center">
             <div class="form-group col-8 mt-6">
-              <button type="button" class="btn col-8 col-mt-6" id="btnLogin" style="background-color: #bc6c25; color: white; ">
+              <button type="button" class="btn col-8 col-mt-6" id="btnLogin" style="margin-top: 5px; background-color: #bc6c25; color: white; ">
                 Login
               </button>
               <div>
@@ -439,12 +439,13 @@
                     <div class="input-group mb-3 justify-content-center">
                       <label class="input-group-text col-4" for="heaterTimer">Heater Timer</label>
                       <select class="form-select" aria-label="Default select example">
-                        <option selected>10 Minutes</option>
-                        <option value="1">20 Minutes</option>
-                        <option value="2">30 Minutes</option>
-                        <option value="3">40 Minutes</option>
-                        <option value="3">50 Minutes</option>
-                        <option value="3">60 Minutes</option>
+                        <option selected>Heater Off</option>
+                        <option value="1">10 Minutes</option>
+                        <option value="2">20 Minutes</option>
+                        <option value="3">30 Minutes</option>
+                        <option value="4">40 Minutes</option>
+                        <option value="5">50 Minutes</option>
+                        <option value="6">60 Minutes</option>
                       </select>
                     </div>
                   </div>
@@ -460,12 +461,13 @@
                     <div class="input-group mb-3 justify-content-center">
                       <label class="input-group-text" for="fanTimer">Fan Timer</label>
                       <select class="form-select" aria-label="Default select example">
-                        <option selected>10 Minutes</option>
-                        <option value="1">20 Minutes</option>
-                        <option value="2">30 Minutes</option>
-                        <option value="3">40 Minutes</option>
-                        <option value="3">50 Minutes</option>
-                        <option value="3">60 Minutes</option>
+                        <option selected>Fan Off</option>
+                        <option value="1">10 Minutes</option>
+                        <option value="2">20 Minutes</option>
+                        <option value="3">30 Minutes</option>
+                        <option value="4">40 Minutes</option>
+                        <option value="5">50 Minutes</option>
+                        <option value="6">60 Minutes</option>
                       </select>
                     </div>
                   </div>
@@ -517,6 +519,17 @@
         if (outcome != "Bad Username or Password") {
           sessionStorage.setItem("SessionID", objResult.SessionID);
           strSessionID = sessionStorage.getItem("SessionID");
+          $.getJSON(base_url + 'environment.php', { SessionID: strSessionID, days: 7 }, function (result) {
+            if (result) {
+              if (result.length > 0) {
+                $.each(result, function (index, logEntry) {
+                  arrTemp.push(logEntry.Temperature);
+                  arrHumid.push(logEntry.Humidity);
+                  arrDays.push(logEntry.ObservationDateTime);
+                })
+              }
+            }
+          })
           $("#divLogin").slideToggle();
           $("#divHome").slideToggle();
         }
@@ -670,6 +683,18 @@
                       console.log(data);
                     })
                   });
+                  postEnviroment();
+                  $.getJSON(base_url + 'environment.php', { SessionID: strSessionID, days: 7 }, function (result) {
+                    if (result) {
+                      if (result.length > 0) {
+                        $.each(result, function (index, logEntry) {
+                          arrTemp.push(logEntry.Temperature);
+                          arrHumid.push(logEntry.Humidity);
+                          arrDays.push(logEntry.ObservationDateTime);
+                        })
+                      }
+                    }
+                  })
                   $("#divRegister").slideToggle();
                   $("#divHome").slideToggle();
                 });
@@ -681,7 +706,6 @@
 
 
     $("#diffAddressCheck").on("change", function () {
-      console.log($(this).is(":checked"));
       $("#coopInfo").slideToggle();
     });
 
@@ -694,65 +718,14 @@
       let strobDateTime = new Date();
       let strHumidity = "High";
       let strTemp = 76;
+      
       if (!dashboardActive) {
         $("#divDashboard").show();
         $("#divSettings").hide();
         dashboardActive = true;
         settingsActive = false;
       }
-      $.post('https://simplecoop.swollenhippo.com/environment.php', { SessionID: strSessionID, observationDateTime: '2022-11-23', temperature: '46', humidity: '52' })
-        .done(function (bob) {
-          let objResults = JSON.parse(bob);
-          console.log(objResults);
-        })
-      $.post('https://simplecoop.swollenhippo.com/environment.php', { SessionID: strSessionID, observationDateTime: '2022-11-24', temperature: '54', humidity: '62' })
-        .done(function (bob) {
-          let objResults = JSON.parse(bob);
-          console.log(objResults);
-        })
-      $.post('https://simplecoop.swollenhippo.com/environment.php', { SessionID: strSessionID, observationDateTime: '2022-11-25', temperature: '55', humidity: '77' })
-        .done(function (bob) {
-          let objResults = JSON.parse(bob);
-          console.log(objResults);
-        })
-      $.post('https://simplecoop.swollenhippo.com/environment.php', { SessionID: strSessionID, observationDateTime: '2022-11-26', temperature: '51', humidity: '82' })
-        .done(function (bob) {
-          let objResults = JSON.parse(bob);
-          console.log(objResults);
-        })
-      $.post('https://simplecoop.swollenhippo.com/environment.php', { SessionID: strSessionID, observationDateTime: '2022-11-27', temperature: '55', humidity: '80' })
-        .done(function (bob) {
-          let objResults = JSON.parse(bob);
-          console.log(objResults);
-        })
-      $.post('https://simplecoop.swollenhippo.com/environment.php', { SessionID: strSessionID, observationDateTime: '2022-11-28', temperature: '50', humidity: '78' })
-        .done(function (bob) {
-          let objResults = JSON.parse(bob);
-          console.log(objResults);
-        })
-      $.post('https://simplecoop.swollenhippo.com/environment.php', { SessionID: strSessionID, observationDateTime: '2022-11-29', temperature: '52', humidity: '74' })
-        .done(function (bob) {
-          let objResults = JSON.parse(bob);
-          console.log(objResults);
-        })
-      $.post('https://simplecoop.swollenhippo.com/environment.php', { SessionID: strSessionID, observationDateTime: '2022-11-30', temperature: '53', humidity: '72' })
-        .done(function (bob) {
-          let objResults = JSON.parse(bob);
-          console.log(objResults);
-          $.getJSON(base_url + 'environment.php', { SessionID: strSessionID, days: 7 }, function (result) {
-            if (result) {
-              if (result.length > 0) {
-                $.each(result, function (index, logEntry) {
-                  arrTemp.push(logEntry.Temperature);
-                  arrHumid.push(logEntry.Humidity);
-                  arrDays.push(logEntry.ObservationDateTime);
-                })
-              }
-            }
-          })
-
-        });
-    });
+    })
 
     // Handling Egg CRUD Functions//////
 
@@ -788,7 +761,8 @@
         strSettings = $(this).attr("data-settings");
         $.get(base_url + "settings.php", { SessionID: strSessionID, setting: strSettings }).done(function (data) {
           let objValue = JSON.parse(data);
-          $(this).val = objValue.Value;
+          //$(this).val = objValue.Value;
+          document.getElementById(obj).value = "22:53:05";
         });
       });
     });
@@ -879,6 +853,35 @@
         document.getElementById("cleanoutDay").innerHTML = "EXPIRED";
       }
     }, 1000);
+
+
+    function postEnviroment() {
+      $.post('https://simplecoop.swollenhippo.com/environment.php', { SessionID: strSessionID, observationDateTime: '2022-11-23', temperature: '46', humidity: '52' })
+        .done(function (bob) {
+        })
+      $.post('https://simplecoop.swollenhippo.com/environment.php', { SessionID: strSessionID, observationDateTime: '2022-11-24', temperature: '54', humidity: '62' })
+        .done(function (bob) {
+        })
+      $.post('https://simplecoop.swollenhippo.com/environment.php', { SessionID: strSessionID, observationDateTime: '2022-11-25', temperature: '55', humidity: '77' })
+        .done(function (bob) {
+        })
+      $.post('https://simplecoop.swollenhippo.com/environment.php', { SessionID: strSessionID, observationDateTime: '2022-11-26', temperature: '51', humidity: '82' })
+        .done(function (bob) {
+        })
+      $.post('https://simplecoop.swollenhippo.com/environment.php', { SessionID: strSessionID, observationDateTime: '2022-11-27', temperature: '55', humidity: '80' })
+        .done(function (bob) {
+        })
+      $.post('https://simplecoop.swollenhippo.com/environment.php', { SessionID: strSessionID, observationDateTime: '2022-11-28', temperature: '50', humidity: '78' })
+        .done(function (bob) {
+        })
+      $.post('https://simplecoop.swollenhippo.com/environment.php', { SessionID: strSessionID, observationDateTime: '2022-11-29', temperature: '52', humidity: '74' })
+        .done(function (bob) {
+        })
+      $.post('https://simplecoop.swollenhippo.com/environment.php', { SessionID: strSessionID, observationDateTime: '2022-11-30', temperature: '53', humidity: '72' })
+        .done(function (bob) {
+        })
+    }
+
   </script>
 </body>
 
