@@ -57,8 +57,8 @@
 
     .card {
       padding: 30px 40px;
-      margin-top: 60px;
-      margin-bottom: 60px;
+      margin-top: 5px;
+      margin-bottom: 10px;
       border: none;
       box-shadow: 0 18px 22px 0 rgba(0, 0, 0, 0.2);
       background: rgba(255, 255, 255, 0.4);
@@ -146,8 +146,8 @@
             <span class="bar"></span>
           </div>
           <div class="row justify-content-center">
-            <div class="form-group col-sm-6 mt-4">
-              <button type="button" class="btn" id="btnLogin" style="background-color: #bc6c25; color: white; ">
+            <div class="form-group col-8 mt-6">
+              <button type="button" class="btn col-8 col-mt-6" id="btnLogin" style="background-color: #bc6c25; color: white; ">
                 Login
               </button>
               <div>
@@ -158,8 +158,8 @@
               </div>
             </div>
             <hr />
-            <div class="form-group col-sm-6 mt-4">
-              <button type="button" class="btn" id="btnCreateAccountLinker"
+            <div class="form-group col-6 mt-4">
+              <button type="button" class="btn col-6 col-md-4" id="btnCreateAccountLinker"
                 style="background-color: #5a3719; color: white; ">
                 Create Account
               </button>
@@ -298,24 +298,30 @@
   <!--HOMEPAGE DIV-->
   <div id="divHome" class="container-fluid px-1 mx-auto" style="display: none">
     <div class="row flex-nowrap">
-      <div id="divSideNav" class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
+      <div id="divSideNav" class="col-auto col-md-3 col-xl-2 px-sm-2 px-0" style="background-color: rgba(255, 255, 255, 0.65);;">
         <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
-          <span class="fs-5 d-none d-sm-inline">Chicken Coop</span>
+          <h1 class="fs-4 d-none d-sm-inline" style="color: black;">Chicken Coop</h1>
           <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
             <li>
-              <button id="btnNavDashBoard" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
+              <button id="btnNavDashBoard" data-bs-toggle="collapse" class="nav-link px-0 align-middle" style="color: black;">
                 <i class="fa-solid fa-table-columns"></i>
                 <span class="ms-1 d-none d-sm-inline">Dashboard</span>
               </button>
             </li>
             <li>
-              <button id="btnNavSettings" class="nav-link px-0 align-middle">
+              <button id="btnNavAddEggs" data-bs-toggle="collapse" class="nav-link px-0 align-middle" style="color: black;">
+                <i class="fa-solid fa-egg"></i>
+                <span class="ms-1 d-none d-sm-inline">Add Eggs</span>
+              </button>
+            </li>
+            <li>
+              <button id="btnNavSettings" class="nav-link px-0 align-middle" style="color: black;">
                 <i class="fa-solid fa-gear"></i>
                 <span class="ms-1 d-none d-sm-inline">Settings</span>
               </button>
             </li>
             <li>
-              <button id="btnNavWarnings" class="nav-link px-0 align-middle">
+              <button id="btnNavWarnings" class="nav-link px-0 align-middle" style="color: black;">
                 <i class="fa-solid fa-triangle-exclamation"></i>
                 <span class="ms-1 d-none d-sm-inline">Warnings</span>
               </button>
@@ -325,7 +331,7 @@
           <div class="pb-4">
             <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start">
               <li>
-                <button id="btnNavLogout" class="nav-link px-0 align-middle">
+                <button id="btnNavLogout" class="nav-link px-0 align-middle" style="color: black;">
                   <i class="fa-solid fa-arrow-right-from-bracket"></i>
                   <span class="ms-1 d-none d-sm-inline">Log out</span>
                 </button>
@@ -337,16 +343,11 @@
       <div id="divContent" class="col py-3 d-flex justify-content-center">
         <div id="divDashboard" class="col py-3 d-flex justify-content-center">
           <div class="card col-md-10 col-8 h-auto justify-content-center" style="background-color: none;">
+            <h1>Dashboard</h1>
             <div class="row justify-content-evenly">
               <div class="card col-9 dashCard">
-                <input type="number" id="inputAddEggs" name="addEggs" />
-                <button type="button" class="btn" id="btnAddEggs" style="background-color: #bc6c25; color: white">
-                  Add Eggs
-                </button>
-              </div>
-              <div class="card col-9 dashCard">
                 <h6>Total Eggs:</h6>
-                <h4>3894</h4>
+                <h4 id="txtEggsTotal">3894</h4>
               </div>
               <div class="card col-9 dashCard">
                 <h6>Current Temp:</h6>
@@ -361,6 +362,14 @@
                 <h4 id="cleanoutDay"></h4>
               </div>
             </div>
+            <div class="row justify-content-evenly">
+              <div class="card col-8" style="display: none;" id="cardAddEggs">
+                <input type="number" id="inputAddEggs" name="addEggs" />
+                <button type="button" class="btn" id="btnAddEggs" style="background-color: #bc6c25; color: white">
+                  Add Eggs
+                </button>
+              </div>
+            </div>
             <div class="m-3">
               <canvas class="d-none d-sm-block" id="myChart"
                 style="background-color: rgba(255, 255, 255, 0.45);"></canvas>
@@ -372,18 +381,18 @@
           <div id="div" class="col py-3 d-flex justify-content-center">
             <div class="card col-md-10 col-8" style="background-color: none;">
               <h1>Settings</h1>
-              <div class="row d-flex p-3">
-                <div class="col-4">
+              <div class="row row-bottom-margin d-flex p-3">
+                <div class="col-md-6 col-12">
                   <div class="card col-12">
                     <span>Coop Door</span>
                     <div class="input-group mb-3 justify-content-center">
-                      <label class="input-group-text" for="openTimeDoor">Automatic Open Time</label>
-                      <input data-settings="openTimeDoor" id="openTimeDoor" class="" type="time" class="form-control"
+                      <label class="input-group-text col-4" for="openTimeDoor">Automatic Open Time</label>
+                      <input data-settings="openTimeDoor" id="openTimeDoor" class="col-8 settingClass" type="time" class="form-control"
                         placeholder="Time" aria-label="Time" aria-describedby="basic-addon2">
                     </div>
                     <div class="input-group mb-3 justify-content-center">
-                      <label class="input-group-text" for="closeTimeDoor">Automatic Close Time</label>
-                      <input data-settings="closeTimeDoor" id="closeTimeDoor" class="" type="time" class="form-control"
+                      <label class="input-group-text col-4" for="closeTimeDoor">Automatic Close Time</label>
+                      <input data-settings="closeTimeDoor" id="closeTimeDoor" class="col-8 settingClass" type="time" class="form-control"
                         placeholder="Time" aria-label="Time" aria-describedby="basic-addon2">
                     </div>
                     <div class="row d-flex justify-content-center p-3" style="margin: 0 auto;">
@@ -395,17 +404,17 @@
                     </div>
                   </div>
                 </div>
-                <div class="col-4">
+                <div class="col-md-6 col-12">
                   <div class="card col-12">
                     <span>Coop Light</span>
                     <div class="input-group mb-3 justify-content-center">
-                      <label class="input-group-text" for="onTimeLight">Automatic On Time</label>
-                      <input data-settings="onTimeLight" id="onTimeLight" class="settingClass" type="time"
+                      <label class="input-group-text col-4" for="onTimeLight">Automatic On Time</label>
+                      <input data-settings="onTimeLight" id="onTimeLight" class="col-8 settingClass" type="time"
                         class="form-control" placeholder="Time" aria-label="Time" aria-describedby="basic-addon2">
                     </div>
                     <div class="input-group mb-3 justify-content-center">
-                      <label class="input-group-text" for="offTimeLight">Automatic Off Time</label>
-                      <input data-settings="offTimeLight" id="offTimeLight" class="settingClass" type="time"
+                      <label class="input-group-text col-4" for="offTimeLight">Automatic Off Time</label>
+                      <input data-settings="offTimeLight" id="offTimeLight" class="col-8 settingClass" type="time"
                         class="form-control" placeholder="Time" aria-label="Time" aria-describedby="basic-addon2">
                     </div>
                     <div class="row d-flex justify-content-center p-3" style="margin: 0 auto;">
@@ -417,53 +426,55 @@
                     </div>
                   </div>
                 </div>
-                <div class="col-4">
-                  <!-- <div class="card col-10" style="height: 171%;">
-                    <span>Alarms</span>
-                    <div class="row d-flex justify-content-center p-3" style="height: 50%;">
-                      <h4>LOW FOOD ALARM</h4>
-                      <i class="fa-sharp fa-solid fa-check-to-slot" style="font-size: 4em;"></i>
-                    </div>
-                    <div class="row d-flex justify-content-center p-3" style="height: 50%;">
-                      <h4>LOW WATER ALARM</h4>
-                      <i class="fa-sharp fa-solid fa-check-to-slot" style="font-size: 4em;"></i>
-                    </div>
-                  </div> -->
-                </div>
               </div>
-              <div class="row d-flex p-3">
-                <div class="col-4">
+              <div class="row row-bottom-margin d-flex p-3">
+                <div class="col-md-6 col-12">
                   <div class="card col-12">
                     <span>Coop Heater</span>
                     <div class="input-group mb-3 justify-content-center">
-                      <label class="input-group-text" for="onTempHeater">Heater On Temperature</label>
-                      <input data-settings="onTempHeater" id="onTempHeater" class="col-10 settingClass"
-                        class="form-control" placeholder="Temperature" aria-label="Time"
-                        aria-describedby="basic-addon2">
+                      <label class="input-group-text col-4" for="onTempHeater">Heater On Temperature</label>
+                      <input data-settings="onTempHeater" id="onTempHeater" class="col-8 settingClass" type="text" class="form-control"
+                        placeholder="Time" aria-label="Time" aria-describedby="basic-addon2">
                     </div>
-                    <div class="row d-flex justify-content-center p-3">
-                      <label class="input-group-text" for="onTempHeater">Heater Timer</label>
-                      <input data-settings="heaterTimer" id="heaterTimer" class="settingClass" type="time"
-                        class="form-control" placeholder="Time" aria-label="Time" aria-describedby="basic-addon2">
+                    <div class="input-group mb-3 justify-content-center">
+                      <label class="input-group-text col-4" for="heaterTimer">Heater Timer</label>
+                      <select class="form-select" aria-label="Default select example">
+                        <option selected>10 Minutes</option>
+                        <option value="1">20 Minutes</option>
+                        <option value="2">30 Minutes</option>
+                        <option value="3">40 Minutes</option>
+                        <option value="3">50 Minutes</option>
+                        <option value="3">60 Minutes</option>
+                      </select>
                     </div>
                   </div>
                 </div>
-                <div class="col-4">
+                <div class="col-md-6 col-12">
                   <div class="card col-12">
                     <span>Coop Fan</span>
                     <div class="input-group mb-3 justify-content-center">
-                      <label class="input-group-text" for="onTempFan">Fan On Temperature</label>
-                      <input data-settings="onTempFan" id="onTempFan" class="col-10 settingClass" class="form-control"
-                        placeholder="Temperature" aria-label="Time" aria-describedby="basic-addon2">
+                      <label class="input-group-text col-4" for="onTempFan">Fan On Temperature</label>
+                      <input data-settings="onTempFan" id="onTempFan" class="col-8 settingClass" type="text" class="form-control"
+                        placeholder="Time" aria-label="Time" aria-describedby="basic-addon2">
                     </div>
-                    <div class="row d-flex justify-content-center p-3">
-                      <label class="input-group-text" for="onTempHeater">Fan Timer</label>
-                      <input data-settings="lightTimer" id="lightTimer" class="settingClass" type="time"
-                        class="form-control" placeholder="Time" aria-label="Time" aria-describedby="basic-addon2">
+                    <div class="input-group mb-3 justify-content-center">
+                      <label class="input-group-text" for="fanTimer">Fan Timer</label>
+                      <select class="form-select" aria-label="Default select example">
+                        <option selected>10 Minutes</option>
+                        <option value="1">20 Minutes</option>
+                        <option value="2">30 Minutes</option>
+                        <option value="3">40 Minutes</option>
+                        <option value="3">50 Minutes</option>
+                        <option value="3">60 Minutes</option>
+                      </select>
                     </div>
                   </div>
+                </div>
+              </div>
+              <div class="row row-bottom-margin d-flex p-3">
+                <div class="col-12 d-flex justify-content-center">
                   <button type="button" class="btn" id="btnSaveSettings"
-                    style="background-color: #bc6c25; color: white">
+                    style="background-color: #bc6c25; color: white; width: 80%; height: 80%;">
                     Save Settings
                   </button>
                 </div>
@@ -675,6 +686,9 @@
     });
 
     // Handling Dashboard Naviagtion and CRUD Functions///////
+    $("#btnNavAddEggs").on("click", function () {
+      $("#cardAddEggs").slideToggle();
+    });
 
     $("#btnNavDashBoard").on("click", function () {
       let strobDateTime = new Date();
@@ -745,17 +759,14 @@
     $("#btnAddEggs").on("click", function () {
       let strEggs = $('#inputAddEggs').val();
       let DateTime = new Date().toISOString({ year: "numeric", month: "numeric", day: "numeric" });
-      console.log(DateTime);
       let strobDateTime = DateTime.replace('/', '-');
       strobDateTime = strobDateTime.replace('/', '-');
       strobDateTime = strobDateTime.substring(0, 10);
-      console.log(strobDateTime);
       $.post(base_url + "eggs.php", { SessionID: strSessionID, observationDateTime: strobDateTime, eggs: strEggs }).done(function (data) {
-        $.getJSON(base_url + "eggs.php", { SessionID: strSessionID, days: 7 }).done(function (result) {
+        $.getJSON(base_url + "eggs.php", { SessionID: strSessionID, days: 1 }).done(function (result) {
           if (result) {
             $.each(result, function (index, logEntry) {
               arrEggs.push(logEntry.Harvested);
-              console.log(arrEggs);
             });
           }
         });
@@ -777,7 +788,7 @@
         strSettings = $(this).attr("data-settings");
         $.get(base_url + "settings.php", { SessionID: strSessionID, setting: strSettings }).done(function (data) {
           let objValue = JSON.parse(data);
-          //$(this).val() = objValue.Value;
+          $(this).val = objValue.Value;
         });
       });
     });
@@ -809,19 +820,20 @@
       })
     });
 
+    
     <!--All Info needed for Graph. -->
     const data = {
       labels: arrDays,
       datasets: [{
         label: 'Humidity',
-        backgroundColor: 'rgb(255, 99, 132)',
-        borderColor: 'rgb(255, 99, 132)',
+        backgroundColor: '#5a3719',
+        borderColor: '#5a3719',
         data: arrHumid,
       },
       {
         label: 'Temperature',
-        backgroundColor: 'rgb(0, 99, 132)',
-        borderColor: 'rgb(0, 99, 132)',
+        backgroundColor: '#bc6c25',
+        borderColor: '#bc6c25',
         data: arrTemp,
       },
       ]
