@@ -339,7 +339,12 @@
           <div class="card col-md-10 col-8 h-auto justify-content-center" style="background-color: none;">
             <div class="row justify-content-evenly">
               <div class="card col-9 dashCard">
-                <h6>Add E</h6>
+                <input type="number" id="inputAddEggs" name="addEggs" />
+                <button type="button" class="btn" id="btnAddEggs" style="background-color: #bc6c25; color: white">
+                  Add Eggs
+                </button>
+              </div>
+              <div class="card col-9 dashCard">
                 <h6>Total Eggs:</h6>
                 <h4>3894</h4>
               </div>
@@ -484,6 +489,10 @@
     let base_url = "https://simplecoop.swollenhippo.com/"
     let coopID = ''
     let strSessionID = ''
+    let arrDays = [];
+    let arrTemp = [];
+    let arrHumid = [];
+    let arrEggs = [];
 
     // Handling all Login Functions and CRUD Info///////////////
 
@@ -621,8 +630,6 @@
               let objResult = JSON.parse(data);
               let outcome = objResult.Outcome;
               if (outcome == "New User Created") {
-                $("#divRegister").slideToggle();
-                $("#divHome").slideToggle();
                 $.post(base_url + "useraddress.php", { Email: strEmail, Street1: strStreet1, Street2: strStreet2, City: strCity, State: strState, ZIP: strZIP });
                 $.post(base_url + "sessions.php", { Email: strEmail, Password: strPassword }).done(function (data) {
                   sessionStorage.setItem("SessionID", JSON.parse(data).SessionID);
@@ -651,6 +658,8 @@
                       console.log(data);
                     })
                   });
+                  $("#divRegister").slideToggle();
+                  $("#divHome").slideToggle();
                 });
               }
             });
@@ -676,108 +685,141 @@
         dashboardActive = true;
         settingsActive = false;
       }
-      $.post(base_url + "environment.php", { SessionID: strSessionID, observationDateTime: strobDateTime, temperature: strTemp, humidity: strHumidity }).done(function (data) {
-        let objResult = JSON.parse(data);
-        let outcome = objResult.Outcome;
+      $.post('https://simplecoop.swollenhippo.com/environment.php', { SessionID: strSessionID, observationDateTime: '2022-11-23', temperature: '46', humidity: '52' })
+        .done(function (bob) {
+          let objResults = JSON.parse(bob);
+          console.log(objResults);
+        })
+      $.post('https://simplecoop.swollenhippo.com/environment.php', { SessionID: strSessionID, observationDateTime: '2022-11-24', temperature: '54', humidity: '62' })
+        .done(function (bob) {
+          let objResults = JSON.parse(bob);
+          console.log(objResults);
+        })
+      $.post('https://simplecoop.swollenhippo.com/environment.php', { SessionID: strSessionID, observationDateTime: '2022-11-25', temperature: '55', humidity: '77' })
+        .done(function (bob) {
+          let objResults = JSON.parse(bob);
+          console.log(objResults);
+        })
+      $.post('https://simplecoop.swollenhippo.com/environment.php', { SessionID: strSessionID, observationDateTime: '2022-11-26', temperature: '51', humidity: '82' })
+        .done(function (bob) {
+          let objResults = JSON.parse(bob);
+          console.log(objResults);
+        })
+      $.post('https://simplecoop.swollenhippo.com/environment.php', { SessionID: strSessionID, observationDateTime: '2022-11-27', temperature: '55', humidity: '80' })
+        .done(function (bob) {
+          let objResults = JSON.parse(bob);
+          console.log(objResults);
+        })
+      $.post('https://simplecoop.swollenhippo.com/environment.php', { SessionID: strSessionID, observationDateTime: '2022-11-28', temperature: '50', humidity: '78' })
+        .done(function (bob) {
+          let objResults = JSON.parse(bob);
+          console.log(objResults);
+        })
+      $.post('https://simplecoop.swollenhippo.com/environment.php', { SessionID: strSessionID, observationDateTime: '2022-11-29', temperature: '52', humidity: '74' })
+        .done(function (bob) {
+          let objResults = JSON.parse(bob);
+          console.log(objResults);
+        })
+      $.post('https://simplecoop.swollenhippo.com/environment.php', { SessionID: strSessionID, observationDateTime: '2022-11-30', temperature: '53', humidity: '72' })
+        .done(function (bob) {
+          let objResults = JSON.parse(bob);
+          console.log(objResults);
+          $.getJSON(base_url + 'environment.php', { SessionID: strSessionID, days: 7 }, function (result) {
+            if (result) {
+              if (result.length > 0) {
+                $.each(result, function (index, logEntry) {
+                  arrTemp.push(logEntry.Temperature);
+                  arrHumid.push(logEntry.Humidity);
+                  arrDays.push(logEntry.ObservationDateTime);
+                })
+              }
+            }
+          })
 
-        console.log(outcome);
-      });
-      $.get(base_url + "environment.php", { SessionID: strSessionID, days: strobDateTime }).done(function (data) {
-        console.log(data);
-      });
-
-    });
-
-    // Handling Egg CRUD Functions//////
-
-    $("#btnAddEggs").on("click", function () {
-      let strEggs = $('#inputAddEggs').val();
-      let strobDateTime = new Date();
-      $.post(base_url + "eggs.php", { SessionID: strSessionID, observationDateTime: strobDateTime, eggs: strEggs }).done(function (data) {
-        let objResult = JSON.parse(data);
-        let outcome = objResult.Outcome;
-        console.log(outcome);
-      });
-      $.getJSON(base_url + "eggs.php", { SessionID: strSessionID, days: 7 }).done(function (data) {
-        console.log(data);
-      });
-    });
-
-    // Handling all Setting CRUD Functions//////
-
-    $("#btnNavSettings").on("click", function () {
-      if (!settingsActive) {
-        $("#divDashboard").attr("style", "display: none !important");
-        $("#divSettings").show();
-        dashboardActive = false;
-        settingsActive = true;;
-      }
-      let strSettings = '';
-      let strValue = '';
-      $('.settingClass').each(function (i, obj) {
-        strSettings = $(this).attr("data-settings");
-        $.get(base_url + "settings.php", { SessionID: strSessionID, setting: strSettings }).done(function (data) {
-          let objValue = JSON.parse(data);
-          //$(this).val() = objValue.Value;
         });
       });
-    });
 
-    $("#btnSaveSettings").on("click", function () {
-      let strSettings = '';
-      let strValue = '';
-      $('.settingClass').each(function (i, obj) {
-        strSettings = $(this).attr("data-settings");
-        strValue = $(obj).val();
+      // Handling Egg CRUD Functions//////
 
-        $.ajax({
-          type: 'PUT',
-          url: base_url+"settings.php",
-          contentType: 'application/json',
-          data: {SessionID:strSessionID,setting:strSettings, value:strValue},
-          success: function(data) {
-            console.log(data);
-          }
+      $("#btnAddEggs").on("click", function () {
+        let strEggs = $('#inputAddEggs').val();
+        let strobDateTime = new Date();
+        $.post(base_url + "eggs.php", { SessionID: strSessionID, observationDateTime: strobDateTime, eggs: strEggs }).done(function (data) {
+
+          $.getJSON(base_url + "eggs.php", { SessionID: strSessionID, days: 7 }).done(function(result) {
+            if (result) {
+              if (result.length > 0) {
+                $.each(result, function (index, logEntry) {
+                  arrEggs.push(logEntry.Eggs);
+                  console.log(arrEggs);
+                });
+              };
+            }
+          });
+          });
+        });
+
+      // Handling all Setting CRUD Functions//////
+
+      $("#btnNavSettings").on("click", function () {
+        if (!settingsActive) {
+          $("#divDashboard").attr("style", "display: none !important");
+          $("#divSettings").show();
+          dashboardActive = false;
+          settingsActive = true;;
+        }
+        let strSettings = '';
+        let strValue = '';
+        $('.settingClass').each(function (i, obj) {
+          strSettings = $(this).attr("data-settings");
+          $.get(base_url + "settings.php", { SessionID: strSessionID, setting: strSettings }).done(function (data) {
+            let objValue = JSON.parse(data);
+            //$(this).val() = objValue.Value;
+          });
         });
       });
-    });
 
-    $("#btnNavWarnings").on("click", function () {
-      Swal.fire({
-        title: 'You have 3 warnings',
-        icon: 'warning',
-        confirmButtonText: 'Ok'
-      })
-    });
+      $("#btnSaveSettings").on("click", function () {
+        let strSettings = '';
+        let strValue = '';
+        $('.settingClass').each(function (i, obj) {
+          strSettings = $(this).attr("data-settings");
+          strValue = $(obj).val();
 
+          $.ajax({
+            type: 'PUT',
+            url: base_url + "settings.php",
+            contentType: 'application/json',
+            data: { SessionID: strSessionID, setting: strSettings, value: strValue },
+            success: function (data) {
+              console.log(data);
+            }
+          });
+        });
+      });
 
-  </script>
+      $("#btnNavWarnings").on("click", function () {
+        Swal.fire({
+          title: 'You have 3 warnings',
+          icon: 'warning',
+          confirmButtonText: 'Ok'
+        })
+      });
 
-  <script>
     <!--All Info needed for Graph. -->
-    const labels = [
-      'Sunday',
-      'Monday',
-      'Tuesday',
-      'Wednesday',
-      'Thursday',
-      'Friday',
-      'Saturday'
-    ];
-
     const data = {
-      labels: labels,
+      labels: arrDays,
       datasets: [{
         label: 'Humidity',
         backgroundColor: 'rgb(255, 99, 132)',
         borderColor: 'rgb(255, 99, 132)',
-        data: [50, 47, 48, 56, 41, 40, 53],
+        data: arrHumid,
       },
       {
         label: 'Temperature',
         backgroundColor: 'rgb(0, 99, 132)',
         borderColor: 'rgb(0, 99, 132)',
-        data: [73, 69, 74, 72, 65, 63, 58],
+        data: arrTemp,
       },
       ]
     };
