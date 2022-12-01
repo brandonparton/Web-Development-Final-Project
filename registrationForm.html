@@ -361,11 +361,11 @@
               </div>
               <div class="card col-9 dashCard">
                 <h6>Current Temp:</h6>
-                <h4>56°</h4>
+                <h4><span id="txtTempFinal"></span>&#176;</h4>
               </div>
               <div class="card col-9 dashCard">
                 <h6>Humidity:</h6>
-                <h4>46%</h4>
+                <h4><span id="txtHumidFinal"></span>%</h4>
               </div>
               <div class="card col-9 dashCard">
                 <h6>Cleanout In:</h6>
@@ -538,6 +538,8 @@
                   arrDays.push(logEntry.ObservationDateTime);
                 })
               }
+              document.getElementById("txtTempFinal").innerHTML = arrTemp.slice(-1);
+              document.getElementById("txtHumidFinal").innerHTML = arrHumid.slice(-1);
             }
           })
           $("#divLogin").slideToggle();
@@ -702,7 +704,9 @@
                           arrHumid.push(logEntry.Humidity);
                           arrDays.push(logEntry.ObservationDateTime);
                         })
-                      }
+                      };
+                      document.getElementById("txtTempFinal").innerHTML = arrTemp.slice(-1);
+                      document.getElementById("txtHumidFinal").innerHTML = arrHumid.slice(-1);
                     }
                   })
                   $("#divRegister").slideToggle();
