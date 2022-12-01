@@ -124,14 +124,13 @@
     }
 
     .buttonLogout {
-    position: fixed !important;
-    bottom: 10px;
-}
+      position: fixed !important;
+      bottom: 10px;
+    }
 
     .navbarPosition {
       position: fixed !important;
     }
-
   </style>
   <title>Final Project</title>
 </head>
@@ -157,7 +156,8 @@
           </div>
           <div class="row justify-content-center">
             <div class="form-group col-8 mt-6">
-              <button type="button" class="btn col-8 col-mt-6" id="btnLogin" style="margin-top: 5px; background-color: #bc6c25; color: white; ">
+              <button type="button" class="btn col-8 col-mt-6" id="btnLogin"
+                style="margin-top: 5px; background-color: #bc6c25; color: white; ">
                 Login
               </button>
               <div>
@@ -293,7 +293,8 @@
                 </button>
                 <div>
                   Already have an account?
-                  <button type="button" id="btnReturnLogin" class="btn" style="background-color: transparent; color: #bc6c25">
+                  <button type="button" id="btnReturnLogin" class="btn"
+                    style="background-color: transparent; color: #bc6c25">
                     Log In
                   </button>
                 </div>
@@ -308,18 +309,21 @@
   <!--HOMEPAGE DIV-->
   <div id="divHome" class="container-fluid px-1 mx-auto" style="display: none">
     <div class="row flex-nowrap">
-      <div id="divSideNav" class="col-auto col-md-3 col-xl-2 px-sm-2 px-0" style="background-color: rgba(255, 255, 255, 0.65);">
+      <div id="divSideNav" class="col-auto col-md-3 col-xl-2 px-sm-2 px-0"
+        style="background-color: rgba(255, 255, 255, 0.65);">
         <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
           <h1 class="fs-4 d-none d-sm-inline" style="color: black;">Chicken Coop</h1>
           <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start " id="menu">
             <li>
-              <button id="btnNavDashBoard" data-bs-toggle="collapse" class="nav-link px-0 align-middle" style="color: black;">
+              <button id="btnNavDashBoard" data-bs-toggle="collapse" class="nav-link px-0 align-middle"
+                style="color: black;">
                 <i class="fa-solid fa-table-columns"></i>
                 <span class="ms-1 d-none d-sm-inline ">Dashboard</span>
               </button>
             </li>
             <li>
-              <button id="btnNavAddEggs" data-bs-toggle="collapse" class="nav-link px-0 align-middle" style="color: black;">
+              <button id="btnNavAddEggs" data-bs-toggle="collapse" class="nav-link px-0 align-middle"
+                style="color: black;">
                 <i class="fa-solid fa-egg"></i>
                 <span class="ms-1 d-none d-sm-inline">Add Eggs</span>
               </button>
@@ -381,8 +385,10 @@
               </div>
             </div>
             <div class="m-3">
-              <canvas class="d-none d-sm-block" id="myChart"
-                style="background-color: rgba(255, 255, 255, 0.45);"></canvas>
+              <!--<canvas class="d-none d-sm-block" id="myChart" style="background-color: rgba(255, 255, 255, 0.45);"></canvas>-->
+              <canvas class="my-4 chartjs-render-monitor" id="myChart"
+                style="display: block; height: 369px; width: 875px; background-color: rgba(255, 255, 255, 0.45);"
+                width="1093" height="461"></canvas>
             </div>
           </div>
         </div>
@@ -396,15 +402,19 @@
                   <div class="card col-12">
                     <span>Coop Door</span>
                     <div class="input-group mb-3 justify-content-center">
-                      <div><label class="input-group-text col-auto text-wrap form-control-label" for="openTimeDoor">Automatic Open Time</label></div>
-                      <div><input data-settings="openTimeDoor" id="openTimeDoor" class="col-6 col-sm-auto settingClass form-control" type="time" 
-                        placeholder="Time" aria-label="Time" aria-describedby="basic-addon2"></div>
-                      
+                      <div><label class="input-group-text col-auto text-wrap form-control-label"
+                          for="openTimeDoor">Automatic Open Time</label></div>
+                      <div><input data-settings="openTimeDoor" id="openTimeDoor"
+                          class="col-6 col-sm-auto settingClass form-control" type="time" placeholder="Time"
+                          aria-label="Time" aria-describedby="basic-addon2"></div>
+
                     </div>
                     <div class="input-group mb-3 justify-content-center">
-                      <div><label class="input-group-text col-auto text-wrap form-control-label" for="closeTimeDoor">Automatic Close Time</label></div>
-                    <div><input data-settings="closeTimeDoor" id="closeTimeDoor" class="col-6 settingClass form-control" type="time" class="form-control"
-                        placeholder="Time" aria-label="Time" aria-describedby="basic-addon2"></div>
+                      <div><label class="input-group-text col-auto text-wrap form-control-label"
+                          for="closeTimeDoor">Automatic Close Time</label></div>
+                      <div><input data-settings="closeTimeDoor" id="closeTimeDoor"
+                          class="col-6 settingClass form-control" type="time" class="form-control" placeholder="Time"
+                          aria-label="Time" aria-describedby="basic-addon2"></div>
                     </div>
                     <div class="row d-flex justify-content-center p-3" style="margin: 0 auto;">
                       <div class="form-check form-switch text-center justify-content-center">
@@ -419,14 +429,18 @@
                   <div class="card col-12">
                     <span>Coop Light</span>
                     <div class="input-group mb-3 justify-content-center">
-                      <div><label class="input-group-text col-auto text-wrap form-control-label" for="onTimeLight">Automatic On Time</label></div>
-                      <div><input data-settings="onTimeLight" id="onTimeLight" class="col-6 settingClass form-control" type="time"
-                        class="form-control" placeholder="Time" aria-label="Time" aria-describedby="basic-addon2"></div>
+                      <div><label class="input-group-text col-auto text-wrap form-control-label"
+                          for="onTimeLight">Automatic On Time</label></div>
+                      <div><input data-settings="onTimeLight" id="onTimeLight" class="col-6 settingClass form-control"
+                          type="time" class="form-control" placeholder="Time" aria-label="Time"
+                          aria-describedby="basic-addon2"></div>
                     </div>
                     <div class="input-group mb-3 justify-content-center">
-                      <div><label class="input-group-text col-auto text-wrap form-control-label" for="offTimeLight">Automatic Off Time</label></div>
-                      <div><input data-settings="offTimeLight" id="offTimeLight" class="col-6 settingClass form-control" type="time"
-                        class="form-control" placeholder="Time" aria-label="Time" aria-describedby="basic-addon2"></div>
+                      <div><label class="input-group-text col-auto text-wrap form-control-label"
+                          for="offTimeLight">Automatic Off Time</label></div>
+                      <div><input data-settings="offTimeLight" id="offTimeLight" class="col-6 settingClass form-control"
+                          type="time" class="form-control" placeholder="Time" aria-label="Time"
+                          aria-describedby="basic-addon2"></div>
                     </div>
                     <div class="row d-flex justify-content-center p-3" style="margin: 0 auto;">
                       <div class="form-check form-switch text-center justify-content-center">
@@ -443,12 +457,14 @@
                   <div class="card col-12">
                     <span>Coop Heater</span>
                     <div class="input-group mb-3 justify-content-center">
-                      <label class="input-group-text col-auto text-wrap form-control-label" for="onTempHeater">Heater On Temp</label>
-                      <input data-settings="onTempHeater" id="onTempHeater" class="col-6 settingClass form-control" type="text"
-                        placeholder="Temp &#xb0" aria-label="Time" aria-describedby="basic-addon2">
+                      <label class="input-group-text col-auto text-wrap form-control-label" for="onTempHeater">Heater On
+                        Temp</label>
+                      <input data-settings="onTempHeater" id="onTempHeater" class="col-6 settingClass form-control"
+                        type="text" placeholder="Temp &#xb0" aria-label="Time" aria-describedby="basic-addon2">
                     </div>
                     <div class="input-group mb-3 justify-content-center">
-                      <label class="input-group-text col-auto text-wrap form-control-label" for="heaterTimer">Heater Timer</label>
+                      <label class="input-group-text col-auto text-wrap form-control-label" for="heaterTimer">Heater
+                        Timer</label>
                       <select class="form-select" aria-label="Default select example">
                         <option selected>Heater Off</option>
                         <option value="1">10 Minutes</option>
@@ -465,9 +481,10 @@
                   <div class="card col-12">
                     <span>Coop Fan</span>
                     <div class="input-group mb-3 justify-content-center">
-                      <label class="input-group-text col-auto text-wrap form-control-label" for="onTempFan">Fan On Temperature</label>
-                      <input data-settings="onTempFan" id="onTempFan" class="col-6 settingClass form-control" type="text" 
-                        placeholder="Temp &#xb0" aria-label="Time" aria-describedby="basic-addon2">
+                      <label class="input-group-text col-auto text-wrap form-control-label" for="onTempFan">Fan On
+                        Temperature</label>
+                      <input data-settings="onTempFan" id="onTempFan" class="col-6 settingClass form-control"
+                        type="text" placeholder="Temp &#xb0" aria-label="Time" aria-describedby="basic-addon2">
                     </div>
                     <div class="input-group mb-3 justify-content-center">
                       <label class="input-group-text col-6" for="fanTimer">Fan Timer</label>
@@ -736,7 +753,7 @@
       let strobDateTime = new Date();
       let strHumidity = "High";
       let strTemp = 76;
-      
+
       if (!dashboardActive) {
         $("#divDashboard").show();
         $("#divSettings").hide();
@@ -815,13 +832,13 @@
     $("#btnNavWarnings").on("click", function () {
       let warnings = 0;
       let warningsMessage = '';
-      if(foodLevel <= 50){
-        warnings+= 1;
+      if (foodLevel <= 50) {
+        warnings += 1;
         warningsMessage += "LOW FOOD, "
       }
       console.log(foodLevel);
-      if(waterLevel = 50){
-        warnings+= 1;
+      if (waterLevel = 50) {
+        warnings += 1;
         warningsMessage += "LOW WATER, "
       }
       console.log(waterLevel);
@@ -890,7 +907,7 @@
       }
     }, 1000);
 
-    function lowAlarms(){
+    function lowAlarms() {
       foodLevel = Math.floor(Math.random() * 100);
       waterLevel = Math.floor(Math.random() * 100);
     }
