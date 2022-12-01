@@ -517,6 +517,8 @@
     let arrHumid = [];
     let arrEggs = [];
     let eggsTotal = 0;
+    let foodLevel = 0;
+    let waterLevel = 0;
 
     // Handling all Login Functions and CRUD Info///////////////
 
@@ -540,6 +542,7 @@
               }
               document.getElementById("txtTempFinal").innerHTML = arrTemp.slice(-1);
               document.getElementById("txtHumidFinal").innerHTML = arrHumid.slice(-1);
+              lowAlarms();
             }
           })
           $("#divLogin").slideToggle();
@@ -707,6 +710,7 @@
                       };
                       document.getElementById("txtTempFinal").innerHTML = arrTemp.slice(-1);
                       document.getElementById("txtHumidFinal").innerHTML = arrHumid.slice(-1);
+                      lowAlarms();
                     }
                   })
                   $("#divRegister").slideToggle();
@@ -803,8 +807,22 @@
     });
 
     $("#btnNavWarnings").on("click", function () {
+      let warnings = 0;
+      let warningsMessage = '';
+      if(foodLevel <= 50){
+        warnings+= 1;
+        warningsMessage += "LOW FOOD, "
+      }
+      console.log(foodLevel);
+      if(waterLevel = 50){
+        warnings+= 1;
+        warningsMessage += "LOW WATER, "
+      }
+      console.log(waterLevel);
+      warningsMessage = warningsMessage.substr(0, warningsMessage.length - 2);
       Swal.fire({
-        title: 'You have 3 warnings',
+        title: 'You have ' + warnings + ' warnings',
+        text: warningsMessage,
         icon: 'warning',
         confirmButtonText: 'Ok'
       })
@@ -869,6 +887,11 @@
         document.getElementById("cleanoutDay").innerHTML = "EXPIRED";
       }
     }, 1000);
+
+    function lowAlarms(){
+      foodLevel = Math.floor(Math.random() * 100);
+      waterLevel = Math.floor(Math.random() * 100);
+    }
 
 
     function postEnviroment() {
