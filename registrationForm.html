@@ -744,19 +744,19 @@
 
     $("#btnAddEggs").on("click", function () {
       let strEggs = $('#inputAddEggs').val();
-      let DateTime = new Date().toISOString({year:"numeric", month:"numeric", day:"numeric"});
+      let DateTime = new Date().toISOString({ year: "numeric", month: "numeric", day: "numeric" });
       console.log(DateTime);
-      let strobDateTime = DateTime.replace('/','-');
-      strobDateTime = strobDateTime.replace('/','-');
-      strobDateTime = strobDateTime.substring(0,10);
+      let strobDateTime = DateTime.replace('/', '-');
+      strobDateTime = strobDateTime.replace('/', '-');
+      strobDateTime = strobDateTime.substring(0, 10);
       console.log(strobDateTime);
       $.post(base_url + "eggs.php", { SessionID: strSessionID, observationDateTime: strobDateTime, eggs: strEggs }).done(function (data) {
         $.getJSON(base_url + "eggs.php", { SessionID: strSessionID, days: 7 }).done(function (result) {
           if (result) {
-              $.each(result, function (index, logEntry) {
-                arrEggs.push(logEntry.Harvested);
-                console.log(arrEggs);
-              });
+            $.each(result, function (index, logEntry) {
+              arrEggs.push(logEntry.Harvested);
+              console.log(arrEggs);
+            });
           }
         });
       });
