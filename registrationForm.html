@@ -347,7 +347,7 @@
             <div class="row justify-content-evenly">
               <div class="card col-9 dashCard">
                 <h6>Total Eggs:</h6>
-                <h4 id="txtEggsTotal">3894</h4>
+                <h4><span id="txtEggsTotal"></span></h4>
               </div>
               <div class="card col-9 dashCard">
                 <h6>Current Temp:</h6>
@@ -506,7 +506,7 @@
     let arrTemp = [];
     let arrHumid = [];
     let arrEggs = [];
-    let eggsTotal = '';
+    let eggsTotal = 0;
 
     // Handling all Login Functions and CRUD Info///////////////
 
@@ -742,6 +742,8 @@
               arrEggs.push(logEntry.Harvested);
             });
           }
+          eggsTotal += parseInt(arrEggs.slice(-1));
+          document.getElementById("txtEggsTotal").innerHTML = eggsTotal;
         });
       });
     });
