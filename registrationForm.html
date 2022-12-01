@@ -493,6 +493,7 @@
     let arrTemp = [];
     let arrHumid = [];
     let arrEggs = [];
+    let eggsTotal = '';
 
     // Handling all Login Functions and CRUD Info///////////////
 
@@ -737,74 +738,76 @@
           })
 
         });
-      });
+    });
 
-      // Handling Egg CRUD Functions//////
+    // Handling Egg CRUD Functions//////
 
-      $("#btnAddEggs").on("click", function () {
-        let strEggs = $('#inputAddEggs').val();
-        let strobDateTime = new Date();
-        $.post(base_url + "eggs.php", { SessionID: strSessionID, observationDateTime: strobDateTime, eggs: strEggs }).done(function (data) {
-
-          $.getJSON(base_url + "eggs.php", { SessionID: strSessionID, days: 7 }).done(function(result) {
-            if (result) {
-              if (result.length > 0) {
-                $.each(result, function (index, logEntry) {
-                  arrEggs.push(logEntry.Eggs);
-                  console.log(arrEggs);
-                });
-              };
-            }
-          });
-          });
-        });
-
-      // Handling all Setting CRUD Functions//////
-
-      $("#btnNavSettings").on("click", function () {
-        if (!settingsActive) {
-          $("#divDashboard").attr("style", "display: none !important");
-          $("#divSettings").show();
-          dashboardActive = false;
-          settingsActive = true;;
-        }
-        let strSettings = '';
-        let strValue = '';
-        $('.settingClass').each(function (i, obj) {
-          strSettings = $(this).attr("data-settings");
-          $.get(base_url + "settings.php", { SessionID: strSessionID, setting: strSettings }).done(function (data) {
-            let objValue = JSON.parse(data);
-            //$(this).val() = objValue.Value;
-          });
+    $("#btnAddEggs").on("click", function () {
+      let strEggs = $('#inputAddEggs').val();
+      let DateTime = new Date().toISOString({year:"numeric", month:"numeric", day:"numeric"});
+      console.log(DateTime);
+      let strobDateTime = DateTime.replace('/','-');
+      strobDateTime = strobDateTime.replace('/','-');
+      strobDateTime = strobDateTime.substring(0,10);
+      console.log(strobDateTime);
+      $.post(base_url + "eggs.php", { SessionID: strSessionID, observationDateTime: strobDateTime, eggs: strEggs }).done(function (data) {
+        $.getJSON(base_url + "eggs.php", { SessionID: strSessionID, days: 7 }).done(function (result) {
+          if (result) {
+              $.each(result, function (index, logEntry) {
+                arrEggs.push(logEntry.Harvested);
+                console.log(arrEggs);
+              });
+          }
         });
       });
+    });
 
-      $("#btnSaveSettings").on("click", function () {
-        let strSettings = '';
-        let strValue = '';
-        $('.settingClass').each(function (i, obj) {
-          strSettings = $(this).attr("data-settings");
-          strValue = $(obj).val();
+    // Handling all Setting CRUD Functions//////
 
-          $.ajax({
-            type: 'PUT',
-            url: base_url + "settings.php",
-            contentType: 'application/json',
-            data: { SessionID: strSessionID, setting: strSettings, value: strValue },
-            success: function (data) {
-              console.log(data);
-            }
-          });
+    $("#btnNavSettings").on("click", function () {
+      if (!settingsActive) {
+        $("#divDashboard").attr("style", "display: none !important");
+        $("#divSettings").show();
+        dashboardActive = false;
+        settingsActive = true;;
+      }
+      let strSettings = '';
+      let strValue = '';
+      $('.settingClass').each(function (i, obj) {
+        strSettings = $(this).attr("data-settings");
+        $.get(base_url + "settings.php", { SessionID: strSessionID, setting: strSettings }).done(function (data) {
+          let objValue = JSON.parse(data);
+          //$(this).val() = objValue.Value;
         });
       });
+    });
 
-      $("#btnNavWarnings").on("click", function () {
-        Swal.fire({
-          title: 'You have 3 warnings',
-          icon: 'warning',
-          confirmButtonText: 'Ok'
-        })
+    $("#btnSaveSettings").on("click", function () {
+      let strSettings = '';
+      let strValue = '';
+      $('.settingClass').each(function (i, obj) {
+        strSettings = $(this).attr("data-settings");
+        strValue = $(obj).val();
+
+        $.ajax({
+          type: 'PUT',
+          url: base_url + "settings.php",
+          contentType: 'application/json',
+          data: { SessionID: strSessionID, setting: strSettings, value: strValue },
+          success: function (data) {
+            console.log(data);
+          }
+        });
       });
+    });
+
+    $("#btnNavWarnings").on("click", function () {
+      Swal.fire({
+        title: 'You have 3 warnings',
+        icon: 'warning',
+        confirmButtonText: 'Ok'
+      })
+    });
 
     <!--All Info needed for Graph. -->
     const data = {
