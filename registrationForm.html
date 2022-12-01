@@ -778,7 +778,7 @@
         $.get(base_url + "settings.php", { SessionID: strSessionID, setting: strSettings }).done(function (data) {
           let objValue = JSON.parse(data);
           //$(this).val = objValue.Value;
-          document.getElementById(obj).value = "22:53:05";
+          document.getElementById(obj.getAttribute("id")).value = objValue.Value;
         });
       });
     });
