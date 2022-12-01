@@ -122,6 +122,16 @@
     .hidden {
       display: none !important;
     }
+
+    .buttonLogout {
+    position: fixed !important;
+    bottom: 10px;
+}
+
+    .navbarPosition {
+      position: fixed !important;
+    }
+
   </style>
   <title>Final Project</title>
 </head>
@@ -299,13 +309,13 @@
   <div id="divHome" class="container-fluid px-1 mx-auto" style="display: none">
     <div class="row flex-nowrap">
       <div id="divSideNav" class="col-auto col-md-3 col-xl-2 px-sm-2 px-0" style="background-color: rgba(255, 255, 255, 0.65);;">
-        <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
+        <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100 navbarPosition">
           <h1 class="fs-4 d-none d-sm-inline" style="color: black;">Chicken Coop</h1>
-          <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
+          <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start " id="menu">
             <li>
               <button id="btnNavDashBoard" data-bs-toggle="collapse" class="nav-link px-0 align-middle" style="color: black;">
                 <i class="fa-solid fa-table-columns"></i>
-                <span class="ms-1 d-none d-sm-inline">Dashboard</span>
+                <span class="ms-1 d-none d-sm-inline ">Dashboard</span>
               </button>
             </li>
             <li>
@@ -329,9 +339,9 @@
           </ul>
           <hr />
           <div class="pb-4">
-            <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start">
+            <ul class="nav nav-pills flex-column mb-sm-auto align-items-center align-items-sm-start">
               <li>
-                <button id="btnNavLogout" class="nav-link px-0 align-middle" style="color: black;">
+                <button id="btnNavLogout" class="nav-link px-0 buttonLogout" style="color: black;">
                   <i class="fa-solid fa-arrow-right-from-bracket"></i>
                   <span class="ms-1 d-none d-sm-inline">Log out</span>
                 </button>
